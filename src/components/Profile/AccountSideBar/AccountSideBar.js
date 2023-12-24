@@ -59,7 +59,7 @@ const AccountSideBar = () => {
 <div>
   <aside className="user-info-wrapper">
     <div className="user-cover" style={{backgroundImage: 'url(https://bootdey.com/img/Content/bg1.jpg)'}}>
-      <div className="info-label" data-toggle="tooltip" title data-original-title="You currently have 290 Reward Points to spend"><FontAwesomeIcon icon={faMedal}/> {userInfo?.reputation} danh tiếng</div>
+      <div className="info-label" data-toggle="tooltip" title data-original-title="You currently have 290 Reward Points to spend"><FontAwesomeIcon icon={faMedal}/> {userInfo?.reputation} điểm uy tín</div>
     </div>
     <div className="user-info">
       <div className="user-avatar">
@@ -80,7 +80,7 @@ const AccountSideBar = () => {
         <h4>{user.username}</h4><span>Tham gia vào tháng 6, 2017</span>
       </div>
     </div>
-  </aside>
+  </aside> 
   <nav className="list-group">
     <NavLink className="list-group-item with-badge" to={"/member/general"}><FontAwesomeIcon icon={faTh} style={{marginRight: '10px'}}/> Thông tin cá nhân</NavLink>
     <NavLink className="list-group-item" to={"/member/my-product"}><FontAwesomeIcon icon={faProductHunt} style={{marginRight: '10px'}}/> Sản phẩm của tôi {productCount?.myProduct != 0 && <div className="counter">{productCount?.myProduct}</div>}</NavLink>

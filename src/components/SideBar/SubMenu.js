@@ -10,23 +10,27 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserService from '../../service/UserService';
+import Loading from '../Loading';
 
 
 const SubMenu = ({ category, buyActive, sellActive, isAll }) => {
   const [submenuOpen, setSubmenuOpen] = useState(buyActive)
-  const naviagate = useNavigate()
+  const navigate = useNavigate()
+  const [isLoading, setLoading] = useState(false)
   const toggleSubmenu = () => {
     setSubmenuOpen(!submenuOpen)
   }
 
-  const handleUpload = async () => {
+  const handleUpload = async (categoryId) => {
+    setLoading(true)
     const response = await UserService.getCurrentUser()
     if (response?.is_verify == "false"){
-      const result = UserService.sendVerifyEmail(response?.email)
-      naviagate("/verify")
+      UserService.sendVerifyEmail(response?.email)
+      navigate("/verify")
     }else{
-      naviagate("/member/upload")
+      navigate(`/member/upload/category-id=${categoryId}`)
     }
+    setLoading(false)
   }
 
   return (
@@ -51,13 +55,20 @@ const SubMenu = ({ category, buyActive, sellActive, isAll }) => {
                 style={{ color: '#111414', marginRight: '8px' }}
               />Mua</Link>
             </li>
-            <li className={`sub-menu ${sellActive ? 'sub-menu-active' : ''}`}>
-              <Link onClick={() => handleUpload()} >
+            {isLoading ?(
+              <><Loading/></>
+            ): (
+              <>
+                    <li className={`sub-menu ${sellActive ? 'sub-menu-active' : ''}`}>
+              <Link onClick={() => handleUpload(category.id)} >
               <FontAwesomeIcon
                 icon={faBookmark}
                 style={{ color: '#F3787A', marginRight: '8px' }}
               />Bán</Link>
             </li>
+              </>
+            )}
+      
           </ul>
         )}
       </li>

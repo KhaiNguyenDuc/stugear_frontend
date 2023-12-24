@@ -56,9 +56,16 @@ const SearchSideBar = ({
     }));
     setCategories(options);
   };
+
+
   const handleChange = (e) => {
-    setQuery(e.target.value);
-    setCurrentPage(1)
+    let debounceTimer;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      setQuery(e.target.value);
+      setCurrentPage(1)
+    }, 400);
+   
   };
 
   useEffect(() => {
@@ -226,7 +233,7 @@ const SearchSideBar = ({
             <div className="form-outline search-group input-group my-4">
               <input
                 id="search-input"
-                placeholder="Tìm kiếm..."
+                placeholder="Tên sản phẩm, người bán, mô tả,..."
                 type="search"
                 className="form-control"
                 name="q"
