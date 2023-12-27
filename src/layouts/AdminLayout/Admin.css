@@ -1,16 +1,7 @@
-/*!
- * Bootstrap v4.3.1 (https://getbootstrap.com/)
- * Copyright 2011-2019 The Bootstrap Authors
- * Copyright 2011-2019 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
+/* AdminSideBar.css */
+
 .admin-body {
   background-color: #F7F7F8;
-}
-
-.admin .wrapper {
-  position: absolute;
-  left: 0;
 }
 
 .admin .navbar {
@@ -19,19 +10,13 @@
   border: none;
   border-radius: 0;
   margin-bottom: 40px;
-  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .admin .navbar-btn {
-  -webkit-box-shadow: none;
   box-shadow: none;
   outline: none !important;
   border: none;
-}
-
-.admin .wrapper {
-  width: 100%;
 }
 
 .admin #sidebar {
@@ -39,22 +24,12 @@
   max-width: 250px;
   background: #866ec7;
   color: #fff;
-  -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
   transition: all 0.3s;
   position: relative;
 }
 
-.admin #sidebar .h6 {
-  color: #fff;
-}
-
 .admin #sidebar.active {
   margin-left: -250px;
-}
-
-.admin #sidebar.active .custom-menu {
-  margin-right: -50px;
 }
 
 .admin #sidebar h1 {
@@ -66,79 +41,19 @@
   color: #fff;
 }
 
-.admin #sidebar ul.components {
-  padding: 0;
-}
-
-.admin #sidebar ul li {
-  font-size: 16px;
-}
-
-.admin #sidebar ul li>ul {
-  margin-left: 10px;
-}
-
-.admin #sidebar ul li>ul li {
-  font-size: 14px;
-}
-
-.admin #sidebar ul li a {
-  padding: 10px 0;
-  display: block;
-  color: rgba(255, 255, 255, 0.8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.admin #sidebar ul li a:hover {
-  color: #fff;
-}
-
-.admin #sidebar ul li.active>a {
-  background: transparent;
-  color: #fff;
-}
-
-@media (max-width: 991.98px) {
-  .admin #sidebar {
-    margin-left: -250px;
-  }
-
-  .admin #sidebar.active {
-    margin-left: 0;
-  }
-
-  .admin #sidebar .custom-menu {
-    margin-right: -50px !important;
-    top: 10px !important;
-  }
-}
-
 .admin #sidebar .custom-menu {
   display: inline-block;
   position: absolute;
   top: 20px;
   right: 0;
   margin-right: -20px;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
   transition: 0.3s;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .admin #sidebar .custom-menu {
-    -webkit-transition: none;
-    -o-transition: none;
-    transition: none;
-  }
 }
 
 .admin #sidebar .custom-menu .btn {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-}
-
-.admin #sidebar .custom-menu .btn.btn-primary {
   background: #6749b9;
   border-color: #6749b9;
 }
@@ -153,78 +68,9 @@
   position: relative;
 }
 
-.admin .dropdown-toggle::after {
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-@media (max-width: 991.98px) {
-  .admin #sidebarCollapse span {
-    display: none;
-  }
-}
-
 .admin #content {
   width: 100%;
   padding: 0;
   min-height: 100vh;
-  -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
   transition: all 0.3s;
-}
-
-.admin .btn.btn-primary {
-  background: #866ec7;
-  border-color: #866ec7;
-}
-
-.admin .btn.btn-primary:hover,
-.admin .btn.btn-primary:focus {
-  background: #866ec7 !important;
-  border-color: #866ec7 !important;
-}
-
-.admin .footer p {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.admin .form-control {
-  height: 40px !important;
-  background: #fff;
-  color: #000;
-  font-size: 13px;
-  border-radius: 4px;
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
-  border: transparent;
-}
-
-.admin .form-control:focus,
-.admin .form-control:active {
-  border-color: #000;
-}
-
-.admin .form-control::-webkit-input-placeholder {
-  /* Chrome/Opera/Safari */
-  color: rgba(0, 0, 0, 0.3);
-}
-
-.admin .form-control::-moz-placeholder {
-  /* Firefox 19+ */
-  color: rgba(0, 0, 0, 0.3);
-}
-
-.admin .form-control:-ms-input-placeholder {
-  /* IE 0+ */
-  color: rgba(0, 0, 0, 0.3);
-}
-
-.admin .form-control:-moz-placeholder {
-  /* Firefox 18- */
-  color: rgba(0, 0, 0, 0.3);
 }

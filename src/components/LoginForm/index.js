@@ -11,7 +11,6 @@ import OauthSection from "../../components/OauthSection";
 import Divider from "../../components/Divider";
 import AuthService from "../../service/AuthService";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 import Loading from "../Loading";
 import UserService from "../../service/UserService";
 import useProduct from "../../hooks/useProduct";
@@ -23,7 +22,6 @@ const LoginForm = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -32,11 +30,13 @@ const LoginForm = () => {
     setError(false);
     setLoading(true);
     let response = await AuthService.login(credentials);
-    setLoading(false);
+
     if (response.status === 401) {
+      setLoading(false);
       setMessage("Mật khẩu không đúng ");
       setError(true);
     } else if (response.status === 500) {
+      setLoading(false);
       setMessage("Email chưa được đăng ký");
       setError(true);
     } else {
@@ -66,14 +66,11 @@ const LoginForm = () => {
         ...response,
         user_image: `http://localhost:8000/api/users/${response?.user_id}/images`,
       });
-      
-      if (roles.includes("ADMIN")) {
-        navigate("/admin");
-      } else {
-        navigate("/landing-page");
-      }
+      setLoading(false);
     }
   };
+
+  
 
   const getUserInfo = async () => {
     let wishlistCount = 0;
@@ -88,7 +85,6 @@ const LoginForm = () => {
     const orderResponse = await UserService.getCurrentUserOrders();
     if (orderResponse?.status != 400) {
       orderCount = orderResponse?.total_items;
-      console.log(orderResponse)
       localStorage.setItem("order", orderCount)
     }
 
@@ -113,9 +109,9 @@ const LoginForm = () => {
   return (
     <div className="row my-3 justify-content-center w-100">
       <div className="col col-4 box-shadow px-5">
-        {loading && <Loading />}
-        {error && <div className="mt-4 alert alert-danger">{message}</div>}
+
         <OauthSection text="Đăng nhập với: " />
+       
         <Divider />
 
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -178,6 +174,8 @@ const LoginForm = () => {
             <button className="btn btn-dark text-white w-100 ">
               Đăng nhập
             </button>
+            {loading && <Loading />}
+        {error && <div className="mt-4 alert alert-danger">{message}</div>}
             <p className="small fw-bold mt-2 pt-1 mb-0">
               Chưa có tài khoản?
               <a href="/register" className="link-danger">

@@ -10,15 +10,18 @@ import {
   faHeart,
 } from "@fortawesome/free-regular-svg-icons";
 import { Overlay } from "react-bootstrap";
-import { faDollar, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import useProduct from "../../hooks/useProduct";
+import UserService from "../../service/UserService";
+import Loading from "../Loading";
 const UserHeader = () => {
   const { user, setUser } = useAuth();
   const {productCount} = useProduct()
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
+  const [isLoading, setLoading] = useState(false)
   const navigate = useNavigate();
   const ref = useRef(null);
 
@@ -31,7 +34,17 @@ const UserHeader = () => {
     setUser("");
     navigate("/login");
   };
-  console.log(productCount)
+  const handleUpload = async () => {
+    setLoading(true)
+    const response = await UserService.getCurrentUser()
+    if (response?.is_verify == "false"){
+      UserService.sendVerifyEmail(response?.email)
+      navigate("/verify")
+    }else{
+      navigate(`/member/upload/category-id=1`)
+    }
+    setLoading(false)
+  }
   return (
     <>
       <div className="d-flex">
@@ -99,7 +112,17 @@ const UserHeader = () => {
                   <FontAwesomeIcon icon={faCreditCard} /> Ví tiền 
                 </li>
               </Link>
-
+              {isLoading ? (
+                <><Loading/></>
+              ): (
+                <>     <Link className="link" onClick={() => handleUpload()} style={{textDecoration: 'none'}}>
+                <li className="personal-li">
+                  <FontAwesomeIcon icon={faCartShopping} /> Đăng bán 
+                </li>
+              </Link>
+</>
+              )}
+         
               <hr className="bg-dark" />
 
               <button className="btn text-white" onClick={(e) => signOut(e)}>

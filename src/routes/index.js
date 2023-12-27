@@ -32,6 +32,7 @@ import MySell from '../components/Profile/MySell/MySell.js'
 import AdminReport from '../pages/Admin/AdminReport.js'
 import AdminWithdraw from '../pages/Admin/AdminWithdraw.js'
 import AdminOrder from '../pages/Admin/AdminOrders.js'
+import AdminCategory from '../pages/Admin/AdminCategory.js'
 function useRouteElements () {
 
   const AdminRoute = ({ children }) => {
@@ -41,7 +42,8 @@ function useRouteElements () {
   
   const RejectRoute = ({ children }) => {
     const { user } = useAuth();
-    return user?.user_id ? <Navigate to="/landing-page" /> : children;
+     return user?.roles?.includes("ADMIN") ? <Navigate to="/admin" /> :
+     user?.roles?.includes("USER") ? <Navigate to="/landing-page" /> : children;
   };
   
   const routeElements = useRoutes([
@@ -213,6 +215,10 @@ function useRouteElements () {
           path: '/admin/orders',
           element: <AdminOrder/>
         },
+        {
+          path: "/admin/categories",
+          element:<AdminCategory/>
+        }
       ]
     },
     {
