@@ -183,7 +183,7 @@ const AdminOrder = () => {
                         <UserModal userId={order?.buyer_id} />
                       </td>
                       <td>{order?.product_name}</td>
-                      <td>
+                      <td className="text-center">
 
                       <img
                           src={order?.product_image}
@@ -191,10 +191,10 @@ const AdminOrder = () => {
                           style={{ width: "100px", height: "100px" }}
                         />
                       </td>
-                      <td>{order?.quantity}</td>
-                      <td>
+                      <td className="text-center">{order?.quantity}</td>
+                      <td className="text-center">
                   
-                          {order.total}
+                          {order.total} VNĐ
                 
                       </td>
 

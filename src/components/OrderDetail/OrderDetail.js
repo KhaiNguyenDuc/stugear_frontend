@@ -129,11 +129,11 @@ const OrderDetail = () => {
   };
 
   const handleUpdateStatusOrder = async (statusId, status, isSeller) => {
-    let response = {}
-    if(isSeller){
-       response = OrderService.updateStatusBySeller(order.id, statusId);
-    }else{
-       response = OrderService.updateStatusByBuyer(order.id, statusId);
+    let response = {};
+    if (isSeller) {
+      response = OrderService.updateStatusBySeller(order.id, statusId);
+    } else {
+      response = OrderService.updateStatusByBuyer(order.id, statusId);
     }
     if (response?.status !== 400) {
       setOrder({ ...order, status: status });
@@ -229,7 +229,7 @@ const OrderDetail = () => {
   return (
     <>
       <section className="h-100 gradient-custom">
-      <CustomModal
+        <CustomModal
           handleSave={handleConfirmReturnSave}
           handleClose={handleConfirmReturnClose}
           show={confirmReturnShow}
@@ -306,7 +306,11 @@ const OrderDetail = () => {
                       >
                         Đơn hàng
                       </p>
-                      {isOwner && order?.status !== "Đã nhận được hàng" ? (
+                      {isOwner &&
+                      order?.status !== "Đã nhận được hàng" &&
+                      order?.status !== "Hoàn tiền" &&
+                      order?.status !== "Đã giao hàng" &&
+                      order?.status !== "Đã nhận được hàng hoàn" ? (
                         <>
                           <select
                             style={{ maxWidth: "240px" }}
@@ -319,13 +323,23 @@ const OrderDetail = () => {
                             }}
                           >
                             <>
-                              <option value={1}>Đang xử lý</option>
-                              <option value={2}>Đang giao hàng</option>
-                              <option value={3}>Đã giao hàng</option>
-                              {order?.status == "Hoàn hàng" || order?.status == "Đã nhận được hàng hoàn"  && (<>
-                                <option value={5}>Hoàn hàng</option>
-                              <option value={6}>Đã nhận được hàng hoàn</option></>)}
-                              <option value={8}>Hủy đơn hàng</option>
+                              {order?.status == "Hoàn hàng" ? (
+                                <>
+                                  <option value={5}>Hoàn hàng</option>
+                                  <option value={6}>
+                                    Đã nhận được hàng hoàn
+                                  </option>
+                                </>
+                              ) : (
+                                <>
+                                  <option value={1}>Đang xử lý</option>
+                                  <option value={2}>Đang giao hàng</option>
+                                  <option value={3}>Đã giao hàng</option>
+                                  {order?.status == "Đang xử lý" && (<option value={8}>Hủy đơn hàng</option>)}
+                                  
+                                </>
+                              )}
+                              
                             </>
                           </select>
                         </>
@@ -483,8 +497,11 @@ const OrderDetail = () => {
                                     </>
                                   )}
                                   <hr className="flex-fill track-line" />
-                                   
-                                  {order?.status === "Hoàn hàng" || (order?.status == "Đã nhận được hàng hoàn" && isOwner!=true) ? (
+
+                                  {order?.status === "Hoàn hàng" ||
+                                  ((order?.status == "Đã nhận được hàng hoàn" ||
+                                    order?.status == "Hoàn tiền") &&
+                                    isOwner != true) ? (
                                     <>
                                       <span
                                         className="d-flex justify-content-center 
@@ -493,36 +510,42 @@ const OrderDetail = () => {
                                     </>
                                   ) : (
                                     <>
-                                    {order?.status == "Đã nhận được hàng hoàn" ? (
-                                      <>
-                                      <span
-                                        className="d-flex justify-content-center 
+                                      {order?.status ==
+                                      "Đã nhận được hàng hoàn" ? (
+                                        <>
+                                          <span
+                                            className="d-flex justify-content-center 
      align-items-center big-dot dot"
-                                      ></span>
-                                      </>
-                                    ): (<>
-                                                 {order?.status === "Đã nhận được hàng" ? (
-                                    <>
-                                      <span
-                                        className="d-flex justify-content-center 
+                                          ></span>
+                                        </>
+                                      ) : order?.status == "Hoàn tiền" ? (
+                                        <>
+                                          <span
+                                            className="d-flex justify-content-center 
      align-items-center big-dot dot"
-                                      ></span>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <span className="dot" />
+                                          ></span>
+                                        </>
+                                      ) : (
+                                        <>
+                                          {order?.status ===
+                                          "Đã nhận được hàng" ? (
+                                            <>
+                                              <span
+                                                className="d-flex justify-content-center 
+     align-items-center big-dot dot"
+                                              ></span>
+                                            </>
+                                          ) : (
+                                            <>
+                                              <span className="dot" />
+                                            </>
+                                          )}
+                                        </>
+                                      )}
                                     </>
                                   )}
-                                    </>)}
-                            
-                                    </>
-                                  )}
-
-
-                              
                                 </>
                               )}
-
                             </div>
                             <div className="d-flex flex-row justify-content-between align-items-center">
                               <div className="d-flex flex-column align-items-start">
@@ -544,8 +567,10 @@ const OrderDetail = () => {
                                   <div className="d-flex flex-column justify-content-center">
                                     <span>Đã giao hàng</span>
                                   </div>
-                                  
-                                  {order?.status == "Hoàn hàng" || (order?.status == "Đã nhận được hàng hoàn" && isOwner!=true)  ? (
+                                  {order?.status == "Hoàn hàng" ||
+                                  ((order?.status == "Đã nhận được hàng hoàn" ||
+                                    order?.status == "Hoàn tiền") &&
+                                    isOwner != true) ? (
                                     <>
                                       <div className="d-flex flex-column align-items-start">
                                         <span>Hoàn hàng</span>
@@ -553,19 +578,26 @@ const OrderDetail = () => {
                                     </>
                                   ) : (
                                     <>
-                                    {order?.status == "Đã nhận được hàng hoàn" ?(
-                                      <>
+                                      {order?.status ==
+                                      "Đã nhận được hàng hoàn" ? (
+                                        <>
                                           <div className="d-flex flex-column justify-content-center align-items-center">
-                                        <span>Đã nhận hàng hoàn</span>
-                                      </div>
-                                      </>
-                                    ): 
-                                    (<>
-                                        <div className="d-flex flex-column justify-content-center align-items-center">
-                                        <span>Đã nhận hàng</span>
-                                      </div>
-                                    </>)}
-                                  
+                                            <span>Đã nhận hàng hoàn</span>
+                                          </div>
+                                        </>
+                                      ) : order?.status == "Hoàn tiền" ? (
+                                        <>
+                                          <div className="d-flex flex-column justify-content-center align-items-center">
+                                            <span>Hoàn tiền</span>
+                                          </div>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <div className="d-flex flex-column justify-content-center align-items-center">
+                                            <span>Đã nhận hàng</span>
+                                          </div>
+                                        </>
+                                      )}
                                     </>
                                   )}
                                 </>
@@ -632,8 +664,7 @@ const OrderDetail = () => {
                         <></>
                       )}
                     </div>
-                    {order?.status ==="Đang xử lý" &&
-                    isOwner != true ? (
+                    {order?.status === "Đang xử lý" && isOwner != true ? (
                       <>
                         <button
                           className="btn btn-danger mt-3"
@@ -647,10 +678,11 @@ const OrderDetail = () => {
                       <></>
                     )}
 
-                  {order?.status === "Hoàn hàng" &&
-                    isOwner === true ? (
+                    {order?.status === "Hoàn hàng" && isOwner === true ? (
                       <>
-                      <p className="text-success">Bạn đã nhận được hàng hoàn ?</p>
+                        <p className="text-success">
+                          Bạn đã nhận được hàng hoàn ?
+                        </p>
                         <button
                           className="btn btn-danger mt-2"
                           style={{ backgroundColor: "green" }}
@@ -662,7 +694,6 @@ const OrderDetail = () => {
                     ) : (
                       <></>
                     )}
-
                   </div>
                   <div
                     className="card-footer border-0 px-4 py-5"
