@@ -18,6 +18,7 @@ import ProductService from "../../../service/ProductService";
 import { ToastContainer, toast } from "react-toastify";
 import Vote from "../Vote/Vote";
 import useAuth from "../../../hooks/useAuth"
+import UserModal from "../../Profile/UserModal/UserModal";
 const Comment = ({
   children,
   comment,
@@ -81,14 +82,13 @@ const Comment = ({
           <Vote voteNum={comment.vote} commentId={comment?.id}/>
         )}
         
+        <div className="mt-4">
 
-        <Link>
-          <img
-            className="img-sm rounded-circle mt-4"
-            alt=""
-            src={comment.owner_image}
-          />
-        </Link>
+        <UserModal userId={comment.owner_id}/>
+        </div>
+       
+         
+      
         <div className="media-body mt-4 ">
           <Link className="me-3">{comment.owner_name} </Link>
           {comment.rating ? (
@@ -115,7 +115,7 @@ const Comment = ({
           <div className="mt-1 mb-3">
             <span className="text-muted">
               {" "}
-              <FontAwesomeIcon icon={faClock} className="me-2"/> {comment.last_updated}
+              <FontAwesomeIcon icon={faClock} className="me-2"/>{comment.last_updated}
             </span>
           </div>
           <p>
@@ -130,6 +130,7 @@ const Comment = ({
               <>
                         <button
               className="btn  btn-sm btn-reply  "
+              style={{marginLeft: '0px'}}
               onClick={(e) => handleReplyClick(e)}
             >
               Trả lời

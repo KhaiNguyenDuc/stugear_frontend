@@ -155,7 +155,7 @@ const CategoryFilter = ({
           Sắp xếp
         </button>
 
-        <ul className="dropdown-menu dropdown-menu-dark mt-2" aria-labelledby="dropdown">
+        <ul className="dropdown-menu  mt-2" aria-labelledby="dropdown">
           <li>
             <button className="dropdown-item" onClick={() => handleSortClick("lastUpdate")}>
               <FontAwesomeIcon icon={sortLastUpdate === "increase" ? faArrowDown : faArrowUp} style={{ color: getArrowIconColor(sortLastUpdate) }} /> Ngày đăng

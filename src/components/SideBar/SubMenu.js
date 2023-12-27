@@ -2,7 +2,11 @@
 import {
   faCaretUp,
   faCaretDown,
-  faBookmark
+  faBookmark,
+  faBook,
+  faNoteSticky,
+  faGear,
+  faTools
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './SubMenu.css'
@@ -39,7 +43,10 @@ const SubMenu = ({ category, buyActive, sellActive, isAll }) => {
         <div className={`sub-menu ${buyActive || sellActive ? 'menu-active' : ''}`}>
 
         <Link onClick={toggleSubmenu} >
-          {category.name}{' '}
+          {category.name === "Sách" ? <FontAwesomeIcon icon={faBook} style={{color: 'green'}}/> :  
+           category.name === "Tài liệu" ? <FontAwesomeIcon icon={faNoteSticky} style={{color: 'grey'}}/> :
+           category.name === "Linh kiện" ? <FontAwesomeIcon icon = {faGear}/> : <FontAwesomeIcon icon={faTools}/>}
+          {' '} {category.name}{' '}
           <FontAwesomeIcon
             icon={submenuOpen ? faCaretUp : faCaretDown}
           />

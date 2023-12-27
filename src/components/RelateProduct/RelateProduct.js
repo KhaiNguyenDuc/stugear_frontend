@@ -21,17 +21,20 @@ const RelateProduct = ({ products }) => {
                   key={index}
                   style={{ textDecoration: "none", color: "#7355F7" }}
                 >
-                  <div className="relate-product-item ">
+                  <div className="relate-product-item d-flex ">
                     <img
                       src={product?.product_image}
-                      className="small-image"
+                      style={{width: '100px', height: '100px'}}
                       alt=""
                     />
-                    {product.title}
-                    <p className="relate-price mt-2">Giá: {product.price}</p>
+                    
+                <div className="ms-3">
+                <p className="relate-price">{product.title} </p>
+                    <p>Giá: {product.price}</p>
+                </div>
                   </div>
                 </Link>
-                <div key={index} className="tag-container ">
+                <div key={index} className="tag-container mt-2">
                   {product.tags.map((tag, index) => (
                     <button
                       key={index}

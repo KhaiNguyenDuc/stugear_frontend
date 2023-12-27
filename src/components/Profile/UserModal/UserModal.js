@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import AskService from "../../../service/AskService";
+import { Link } from "react-router-dom";
 const UserModal = ({ userId }) => {
   const [user, setUser] = useState([]);
   const [reportContent, setReportContent] = useState("");
@@ -88,14 +89,14 @@ const UserModal = ({ userId }) => {
   };
   return (
     <>
-      <span onClick={openModal}>
+      <Link onClick={openModal}>
         <img
           src={`http://localhost:8000/api/users/${user?.id}/images`}
           className="pic rounded-circle"
           style={{ width: "40px", height: "40px" }}
           alt=""
         />
-      </span>
+      </Link>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

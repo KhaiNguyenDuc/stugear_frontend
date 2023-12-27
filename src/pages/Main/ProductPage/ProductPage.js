@@ -134,7 +134,7 @@ const ProductPage = () => {
                         style={{ textDecoration: "None", color: "black" }}
                         to={`/member/upload/${slug}`}
                       >
-                        <button className=" product-edit ">
+                        <button className="product-edit ">
                           {" "}
                           <FontAwesomeIcon
                             icon={faPencil}
@@ -149,7 +149,7 @@ const ProductPage = () => {
                         style={{ textDecoration: "None", color: "black" }}
                         onClick={() => setShow(true)}
                       >
-                        <button className=" product-remove">
+                        <button className="product-remove">
                           <FontAwesomeIcon icon={faTrash} className="me-2" />{" "}
                           Xóa sản phẩm
                         </button>

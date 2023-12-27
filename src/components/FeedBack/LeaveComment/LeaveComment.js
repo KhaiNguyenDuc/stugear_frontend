@@ -17,12 +17,16 @@ const LeaveComment = ({ productId, setKey, isUnApproved }) => {
       setError("Vui lòng chọn số sao");
       return;
     }
+    if(comment.content === undefined || comment.content === ""){
+      setError("Vui lòng nhập nội dung")
+      return;
+    }
     setLoading(true);
     const response = await ProductService.createCommentByProductId(
       productId,
       comment
     );
-    if (response?.status === 500) {
+    if (response?.status === 400) {
       console.log("Something went wrong");
     } else {
       setError("");
@@ -46,7 +50,7 @@ const LeaveComment = ({ productId, setKey, isUnApproved }) => {
   };
   return (
     <div className="my-5">
-      {error && <div className="alert alert-danger text-center">{error}</div>}
+     
       <div className="card-body text-center">
         <div className="comment-box text-center">
           {isUnApproved == true ? (
@@ -114,7 +118,7 @@ const LeaveComment = ({ productId, setKey, isUnApproved }) => {
                     rows={4}
                     defaultValue={""}
                     name="content"
-                    onInput={(e) => handleChange(e)}
+                    onInput={(e) => {handleChange(e); setError("")}}
                     value={comment.content}
                   />
                 </div>
@@ -125,6 +129,7 @@ const LeaveComment = ({ productId, setKey, isUnApproved }) => {
                   >
                     Gửi <FontAwesomeIcon icon={faArrowRight} />
                   </button>
+                  {error && <div className="alert alert-danger text-center mt-2">{error}</div>}
                 </div>
               </div>
             </>
