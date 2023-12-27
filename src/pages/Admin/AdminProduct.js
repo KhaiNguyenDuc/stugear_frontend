@@ -52,19 +52,22 @@ const AdminUser = () => {
 
   const convertStatusToName = (status) => {
     switch (status) {
-      case "2":
+      case 2:
         return "Chờ duyệt";
-      case "3":
+      case 3:
         return "Đã duyệt";
-      case "4":
-        return "Đã bán";
       default:
-        return "Đã thanh toán";
+        return "Hết hàng";
     }
   };
 
-  const handleStatusChange = async (e, productId) => {
-    const selectedStatus = e.target.value;
+  const handleStatusChange = async (e, productId, status) => {
+    let selectedStatus = ""
+    if(e !== undefined){
+      selectedStatus = e.target.value;
+    }else{
+      selectedStatus = status
+    }
     console.log(selectedStatus);
     await updateStatus(productId, selectedStatus);
     const selectedStatusString = convertStatusToName(selectedStatus);
@@ -134,13 +137,12 @@ const AdminUser = () => {
           <table className="table table-bordered">
             <thead>
               <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Ảnh</th>
+                <th scope="col" className="text-center">ID</th>
+                <th scope="col" className="text-center">Ảnh</th>
                 <th scope="col">Tiêu đề</th>
                 <th scope="col">Giá</th>
                 <th scope="col">Trạng thái</th>
-                <th scope="col">Chuyển trạng thái</th>
-                <th scope="col">Cập nhật</th>
+                <th scope="col">Cập nhật cuối</th>
               </tr>
             </thead>
             {isLoading ? (
@@ -153,9 +155,20 @@ const AdminUser = () => {
                 <tbody>
                   {products?.map((product) => (
                     <tr key={product.id}>
-                      <td>{product.id}</td>
+                      <td className="text-center">{product.id}</td>
                       <td className="text-center">
-                        <Link to={"/home-page/product-detail/" + product.id}>
+                      {product.status == "Nháp" ? (
+                        <>
+                         <img
+                            src={product.product_image}
+                            alt=""
+                            className="admin-small-img"
+                            style={{ width: "90%", height: "100px" }}
+                          />
+                        </>
+                      ): (
+                        <>
+                        <Link to={`/home-page/product-detail/${product.id}`}>
                           <img
                             src={product.product_image}
                             alt=""
@@ -163,34 +176,22 @@ const AdminUser = () => {
                             style={{ width: "90%", height: "100px" }}
                           />
                         </Link>
+                        </>
+                      )}
+                        
                       </td>
                       <td>{product.title}</td>
                       <td>{product.price}</td>
-                      <td>{product.status}</td>
-                      <td>
-                        <select
-                          className="form-select"
-                          aria-label="Default select example"
-                          value={
-                            product.status === "Chờ duyệt"
-                              ? 2
-                              : product.status === "Đã duyệt"
-                              ? 3
-                              : product.status === "Đã bán"
-                              ? 4
-                              : 5
-                          }
-                          onChange={(e) => handleStatusChange(e, product.id)}
-                        >
-                          <>
-                            <option value={2}>Chờ duyệt</option>
-                            <option value={3}>Đã duyệt</option>
-                            <option value={4}>Đã bán</option>
-                            <option value={5}>Đã thanh toán</option>
-                          </>
-                        </select>
+                      <td>{product.status}
+                      {product?.status === "Chờ duyệt" ? (
+                        <><div className="mt-1"><button className="btn" onClick={() => handleStatusChange(undefined, product.id, 3)}>Duyệt</button></div></>
+                      ): (
+                        <></>
+                      )}
                       </td>
-
+                  
+                      
+                    
                       <td>{product.last_updated}</td>
                     </tr>
                   ))}

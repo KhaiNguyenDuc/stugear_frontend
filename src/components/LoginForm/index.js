@@ -35,11 +35,19 @@ const LoginForm = () => {
       setLoading(false);
       setMessage("Mật khẩu không đúng ");
       setError(true);
+      return
     } else if (response.status === 500) {
       setLoading(false);
       setMessage("Email chưa được đăng ký");
       setError(true);
-    } else {
+      return
+    } else if(response.status === 403){
+      setLoading(false);
+      setMessage("Tài khoản bị chặn");
+      setError(true);
+      return
+    }
+    else {
       const accessToken = response.access_token;
       const refreshToken = response.refresh_token;
       const userId = response.user_id;
@@ -171,10 +179,14 @@ const LoginForm = () => {
           </div>
 
           <div className="my-4">
-            <button className="btn btn-dark text-white w-100 ">
+            
+            {loading ? (
+              <><Loading /></>
+            ) : (
+              <><button className="btn btn-dark text-white w-100 ">
               Đăng nhập
-            </button>
-            {loading && <Loading />}
+            </button></>
+            )}
         {error && <div className="mt-4 alert alert-danger">{message}</div>}
             <p className="small fw-bold mt-2 pt-1 mb-0">
               Chưa có tài khoản?

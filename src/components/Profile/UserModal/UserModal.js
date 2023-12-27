@@ -19,6 +19,9 @@ const UserModal = ({ userId }) => {
   const [reportContent, setReportContent] = useState("");
   const [reportShow, setReportShow] = useState();
   const [reportMessage, setReportMessage] = useState("");
+  const [selectedImageUrl, setSelectedImageUrl] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const handleChange = (e) => {
     setReportContent(e.target.value);
   };
@@ -41,6 +44,10 @@ const UserModal = ({ userId }) => {
   }
 
   function closeModal() {
+    setReportContent("")
+    setReportMessage("")
+    setSelectedImageUrl("")
+    setSelectedImage()
     setIsOpen(false);
   }
   const customStyles = {
@@ -74,8 +81,7 @@ const UserModal = ({ userId }) => {
       setReportMessage("Báo cáo người dùng này thành công");
     }
   };
-  const [selectedImageUrl, setSelectedImageUrl] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {

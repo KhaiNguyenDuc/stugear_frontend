@@ -57,11 +57,11 @@ const AdminReport = () => {
         reports.map((report) => {
           if (report?.id === selectedReport) {
             let statusString;
-            switch (selectedStatus) {
-              case "3":
+            switch (parseInt(selectedStatus)) {
+              case 3:
                 statusString = "Đã hủy";
                 break;
-              case "2":
+              case 2:
                 statusString = "Đã xử lý hoàn tất";
                 break;
               default:
@@ -124,6 +124,7 @@ const AdminReport = () => {
   };
   return (
     <>
+
       <div style={{ height: "780px" }}>
         <CustomModal
           handleSave={handleChangeStatusSave}
@@ -132,13 +133,13 @@ const AdminReport = () => {
           heading={"Thay đổi trạng thái báo cáo này?"}
           body={`Bạn có muốn thay đổi trạng thái báo cáo này không`}
         ></CustomModal>
-        {isError !== "" ? (
+          <div>   {isError !== "" ? (
           <>
             <span className="text-danger">{isError}</span>
           </>
         ) : (
           <></>
-        )}
+        )}</div>
 
         <CSVLink
           data={data}
@@ -220,7 +221,7 @@ const AdminReport = () => {
                           value={
                             report?.status === "Đã xử lý hoàn tất"
                               ? 2
-                              : "Đã hủy"
+                              : report?.status === "Đã hủy"
                               ? 3
                               : 1
                           }
@@ -231,9 +232,18 @@ const AdminReport = () => {
                           }}
                         >
                           <>
-                            <option value={1}>Mới tạo</option>
+                            {report?.status == "Mới tạo" && report?.status !== "Đã hủy"? (
+                              <><option value={1}>Mới tạo</option></>
+                            ): (
+                              <></>
+                            )}
                             <option value={2}>Đã xử lý hoàn tất</option>
-                            <option value={3}>Đã hủy</option>
+                            {report?.status !== "Đã xử lý hoàn tất" ? (
+                              <option value={3}>Đã hủy</option>
+                            ): (
+                              <></>
+                            )}
+                            
                           </>
                         </select>
                       </td>
@@ -267,6 +277,8 @@ const AdminReport = () => {
             setCurrentPage={setCurrentPage}
           />
         </div>
+        
+ 
       </div>
     </>
   );

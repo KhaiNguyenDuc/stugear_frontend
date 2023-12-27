@@ -24,6 +24,10 @@ const BalancePage = () => {
   const [totalPage, setTotalPage] = useState();
   const [withdraws, setWithdraws] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [withdrawRequest, setWithdrawRequest] = useState({
+    amount: 20000,
+    description: "",
+  });
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
   };
@@ -99,12 +103,11 @@ const BalancePage = () => {
   }
 
   function closeModal() {
+    setWithdrawError("")
+    setWithdrawRequest({amount: 20000, description: ""})
     setIsOpen(false);
   }
-  const [withdrawRequest, setWithdrawRequest] = useState({
-    amount: 20000,
-    description: "",
-  });
+
   const customStyles = {
     content: {
       top: "50%",
