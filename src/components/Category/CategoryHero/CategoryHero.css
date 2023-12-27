@@ -27,9 +27,9 @@
 .category-hero-text {
     position: absolute;
     top: 70%;
-    left: 50%;
-    color: #8E44AD;
-    transform: translate(-50%, -50%);
+    left: 30%;
+
+    transform: translate(-20%, -50%);
     text-align: center;
     color: #fff; /* Set text color */
 }

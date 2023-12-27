@@ -12,8 +12,6 @@ const SideBar = ({ categories }) => {
 
 
             <>
-
-
             { categories.map((item) => (
               <SubMenu
                 key={item.id}
