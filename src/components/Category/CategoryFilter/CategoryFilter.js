@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSort } from "@fortawesome/free-solid-svg-icons";
 import ProductService from "../../../service/ProductService";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { InputGroup, Button } from "react-bootstrap";
 const CategoryFilter = ({
   setTotalProduct,
@@ -19,7 +20,9 @@ const CategoryFilter = ({
   const [field, setField] = useState("");
   const [sort, setSort] = useState("");
   const [query, setQuery] = useState("");
-
+  const [sortLastUpdate, setSortLastUpdate] = useState("increase"); // Sort direction for "Ngày đăng"
+  const [sortPrice, setSortPrice] = useState("increase"); // Sort direction for "Giá bán"
+  
   const search = async (criterial, currentPage) => {
     setLoading(true);
     const response = await ProductService.searchInCategory(
@@ -55,6 +58,22 @@ const CategoryFilter = ({
       setQuery(input);
       setCurrentPage(1);
     }, 400); // Adjust the debounce time (in milliseconds) as needed
+  };
+  const handleSortClick = (fieldValue) => {
+    setField(fieldValue);
+    
+    // Toggle the sort direction based on the field
+    if (fieldValue === "lastUpdate") {
+      setSortLastUpdate(sortLastUpdate === "increase" ? "decrease" : "increase");
+    } else if (fieldValue === "price") {
+      setSortPrice(sortPrice === "increase" ? "decrease" : "increase");
+    }
+    setSort(sort === "increase" ? "decrease" : "increase")
+    setCurrentPage(1);
+  };
+
+  const getArrowIconColor = (sortDirection) => {
+    return sortDirection === "increase" ? "red" : "green";
   };
   return (
     <>
@@ -132,44 +151,23 @@ const CategoryFilter = ({
               </InputGroup>
             </div>
             <div className="dropdown col-3">
-              <button
-                className="btn dropdown-toggle"
-                id="dropdown"
-                data-bs-toggle="dropdown"
-              >
-                Sắp xếp
-              </button>
+        <button className="btn dropdown-toggle" id="dropdown" data-bs-toggle="dropdown" >
+          Sắp xếp
+        </button>
 
-              <ul
-                className="dropdown-menu dropdown-menu-dark mt-2"
-                aria-labelledby="dropdown"
-              >
-                <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => {
-                      setField("lastUpdate");
-                      setSort(sort === "increase" ? "decrease" : "increase");
-                      setCurrentPage(1);
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faSort} /> Ngày đăng
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => {
-                      setField("price");
-                      setSort(sort === "increase" ? "decrease" : "increase");
-                      setCurrentPage(1);
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faSort} /> Giá bán
-                  </button>
-                </li>
-              </ul>
-            </div>
+        <ul className="dropdown-menu dropdown-menu-dark mt-2" aria-labelledby="dropdown">
+          <li>
+            <button className="dropdown-item" onClick={() => handleSortClick("lastUpdate")}>
+              <FontAwesomeIcon icon={sortLastUpdate === "increase" ? faArrowDown : faArrowUp} style={{ color: getArrowIconColor(sortLastUpdate) }} /> Ngày đăng
+            </button>
+          </li>
+          <li>
+            <button className="dropdown-item" onClick={() => handleSortClick("price")}>
+              <FontAwesomeIcon icon={sortPrice === "increase" ? faArrowDown : faArrowUp} style={{ color: getArrowIconColor(sortPrice) }} /> Giá bán
+            </button>
+          </li>
+        </ul>
+      </div>
           </div>
         </div>
       </div>

@@ -167,7 +167,7 @@ const UserModal = ({ userId }) => {
                       <></>
                     )}
                     <div className="d-flex justify-content-between mb-4 mt-2">
-                      {localStorage.getItem("roles").includes("ADMIN") ? (
+                      {localStorage.getItem("roles")?.includes("ADMIN") ? (
                         <></>
                       ) : (
                         <>

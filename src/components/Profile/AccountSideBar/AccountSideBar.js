@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import "./AccountSideBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faCartShopping,
   faDashboard,
   faFileUpload,
   faInfo,
@@ -54,6 +55,18 @@ const AccountSideBar = () => {
     await UserService.uploadImage(user?.user_id, e.target.files[0])
     setUser({...user, user_image: `http://localhost:8000/api/users/${user?.user_id}/images/` + `?timestamp=${new Date().getTime()}`})
   };
+
+  const handleUpload = async () => {
+    setLoading(true)
+    const response = await UserService.getCurrentUser()
+    if (response?.is_verify == "false"){
+      UserService.sendVerifyEmail(response?.email)
+      navigate("/verify")
+    }else{
+      navigate(`/member/upload/category-id=1`)
+    }
+    setLoading(false)
+  }
   return (
     <>
 <div>
@@ -88,6 +101,7 @@ const AccountSideBar = () => {
     <NavLink className="list-group-item with-badge " to={"/member/wishlist"}><FontAwesomeIcon icon={faHeart} style={{marginRight: '10px'}}/> Yêu thích {productCount?.wishlist != 0 && <div className="counter">{productCount?.wishlist}</div>}</NavLink>
     <NavLink className="list-group-item with-badge " to={"/member/wallet"}><FontAwesomeIcon icon={faCreditCard} style={{marginRight: '10px'}}/> Ví tiền</NavLink>
     <NavLink className="list-group-item with-badge " to={"/member/order"}><FontAwesomeIcon icon={faReorder} style={{marginRight: '10px'}}/> Lịch sử mua hàng</NavLink>
+    <Link className="list-group-item with-badge "  onClick={() => handleUpload()}><FontAwesomeIcon icon={faCartShopping} style={{marginRight: '10px'}}/> Đăng bán</Link>
     <NavLink className="list-group-item with-badge" to={""} onClick={(e) => handleResetPassword(e)}><FontAwesomeIcon icon={faLock} style={{marginRight: '10px'}}/> Đặt lại mật khẩu</NavLink>
   </nav>
 </div>

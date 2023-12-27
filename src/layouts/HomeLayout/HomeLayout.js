@@ -50,7 +50,7 @@ const HomeLayout = ({title, sub_title}) => {
                 )}
 
           </div>
-          <div className="col content">
+          <div className="col content mb-5">
             <Outlet />
           </div>
         </div>
