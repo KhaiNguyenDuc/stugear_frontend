@@ -44,8 +44,7 @@ const Category = ({ category }) => {
   return (
     <>
       <div className="category">
-        <h1 id="category-title">{category.name}</h1>
-        <hr className="bg-dark my-3"></hr>
+
         <CategoryHero category={category}  key={category.id} setLoading={setLoading} setTotalPage={setTotalPage} category_id={category?.id} currentPage={currentPage} setCurrentPage={setCurrentPage} setProducts={setProducts} />
 
         {isStaticLoading ? <Loading /> : <CategoryStatistic item={statistic} />}

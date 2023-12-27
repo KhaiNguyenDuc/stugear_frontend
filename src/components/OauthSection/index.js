@@ -64,7 +64,16 @@ const OauthSection = ({ text }) => {
   };
 
   return (
-    <div className="social mt-4 " style={{marginLeft:'60px', marginRight:'35px'}} >
+    <>
+    {isError ? (
+          <>
+            <div className="alert alert-danger my-4 text-center">{isError}</div>
+          </>
+        ) :
+      (
+        <></>
+      )}
+         <div className="social mt-4 " style={{marginLeft:'60px', marginRight:'35px'}} >
       {isLoading ? (
         <>
 
@@ -81,16 +90,11 @@ const OauthSection = ({ text }) => {
         }}
       />
       )}
-       {isError ? (
-          <>
-            <div className="alert alert-danger my-4">{isError}</div>
-          </>
-        ) :
-      (
-        <></>
-      )}
+       
      
     </div>
+    </>
+ 
   );
 };
 

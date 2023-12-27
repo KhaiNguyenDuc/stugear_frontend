@@ -23,7 +23,7 @@ const RelateProduct = ({ products }) => {
                 >
                   <div className="relate-product-item ">
                     <img
-                      src="/assets/images/book-thumbnail.jpg"
+                      src={product?.product_image}
                       className="small-image"
                       alt=""
                     />

@@ -29,13 +29,7 @@ const Header = ({ sticky }) => {
     }
   }, [])
 
-  const handleSearch = () => {
-    naviage('/search?name=' + searchValue)
-  }
 
-  const hanldeChange = (e) => {
-    setSearchValue(e.target.value)
-  }
   return (
     <>
     <Navbar

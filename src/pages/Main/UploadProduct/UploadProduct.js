@@ -7,6 +7,7 @@ import ProductService from "../../../service/ProductService";
 import CategoryService from "../../../service/CategoryService";
 import TagService from "../../../service/TagService";
 import Loading from "../../../components/Loading/index";
+import useProduct from "../../../hooks/useProduct";
 import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -24,6 +25,7 @@ import CustomModal from "../../../components/Modal/Modal";
 // "đã thanh toán": "5"
 import Modal from "react-modal";
 const UploadProduct = () => {
+  const {productCount, setProductCount} = useProduct()
   let { slug } = useParams();
   const navigate = useNavigate();
   const [isError, setError] = useState([]);
@@ -102,7 +104,6 @@ const UploadProduct = () => {
       value: tag.id, // Convert id to string if necessary
     }));
     setSelected(selected);
-    console.log(selected);
     setProduct({
       id: response?.id,
       name: response?.title,
@@ -126,9 +127,19 @@ const UploadProduct = () => {
   useEffect(() => {
     setLoading(true);
     if (slug !== undefined) {
-      getProductById(slug);
+      if (!isNaN(slug)) { // Check if slug is a number
+        getProductById(slug);
+      } else if (slug.includes("category-id=")) {
+        
+        const categoryId = slug.split("category-id=")[1];
+        if(categoryId !== "1" && categoryId !== "2" && categoryId !== "3"){
+          navigate("/not-found")
+        }
+        setProduct({...product, category_id: categoryId})
+      }
       setupdated(true);
     }
+
     getAllCategories();
     getAllTags();
     setLoading(false);
@@ -169,7 +180,6 @@ const UploadProduct = () => {
       productId,
       otherItems.map((item) => item.value).concat(tag_ids)
     );
-    //  await ProductService.attachTag(productId, selected.map(item => item.value))
     setLoading(false);
     setAdded(true);
     toast.success("Lưu nháp thành công!", {
@@ -182,7 +192,9 @@ const UploadProduct = () => {
       progress: undefined,
       theme: "light",
     });
-    //  navigate("/member/my-product")
+    setProductCount({...productCount, myProduct: parseInt(productCount.myProduct)+1 })
+    localStorage.setItem("product", parseInt(productCount.myProduct)+1 )
+     navigate("/member/my-product")
   };
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -224,6 +236,7 @@ const UploadProduct = () => {
       return;
     }
     await ProductService.updateStatus(product?.id, 2);
+    
   };
   const errorTranslations = {
     "The name field is required.": "Tên là bắt buộc.",
@@ -231,7 +244,7 @@ const UploadProduct = () => {
     "The edition field is required.": "Phiên bản là bắt buộc.",
     "The origin price field is required.": "Giá gốc là bắt buộc.",
     "The origin price field must be at least 1.": "Giá gốc phải lớn hơn 1000",
-    "The price field must be at least 1.": "Giá bán phải lớn hơn 10000",
+    "The price field must be at least 1.": "Giá bán phải lớn hơn 1000",
     "The name field must be a string.": "Tên là bắt buộc"
   };
   
@@ -296,6 +309,8 @@ const UploadProduct = () => {
       progress: undefined,
       theme: "light",
     });
+    setProductCount({...productCount, myProduct: productCount.myProduct + 1})
+    localStorage.setItem("product", productCount.myProduct+1 )
     navigate("/member/my-product")
   };
 
@@ -339,7 +354,7 @@ const UploadProduct = () => {
                 onChange={(e) => handleChange(e)}
                 value={product.category_id}
               >
-
+                
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
@@ -411,7 +426,7 @@ const UploadProduct = () => {
                   name="name"
                   onChange={(e) => {
                     handleChange(e);
-                    setError({ ...isError, title: [] });
+                    setError({ ...isError, name: [] });
                   }}
                   value={product.name}
                 />

@@ -41,7 +41,8 @@ function useRouteElements () {
   
   const RejectRoute = ({ children }) => {
     const { user } = useAuth();
-    return user?.user_id ? <Navigate to="/landing-page" /> : children;
+     return user?.roles?.includes("ADMIN") ? <Navigate to="/admin" /> :
+     user?.roles?.includes("USER") ? <Navigate to="/landing-page" /> : children;
   };
   
   const routeElements = useRoutes([

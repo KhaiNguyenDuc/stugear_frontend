@@ -13,8 +13,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import CustomModal from "../../../components/Modal/Modal";
+import useProduct from "../../../hooks/useProduct";
 const ProductPage = () => {
   const [product, setProduct] = useState({});
+  const {productCount, setProductCount} = useProduct()
   const [relateProducts, setRelateProducrs] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [isOwner, setOwner] = useState(false);
@@ -57,6 +59,7 @@ const ProductPage = () => {
   const handleDelete = async () => {
     await ProductService.deleteProduct(product?.id);
 ;
+
     navigate("/home-page/category/1");
   };
 
@@ -65,7 +68,10 @@ const ProductPage = () => {
     setShow(false);
   };
   const handleSave = () => {
+    setProductCount({...productCount, myProduct: productCount.myProduct-1})
+    localStorage.setItem("product", productCount.myProduct-1)
     handleDelete();
+
   };
   return (
     <div>
