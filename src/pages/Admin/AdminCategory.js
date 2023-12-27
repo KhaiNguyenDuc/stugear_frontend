@@ -80,7 +80,7 @@ const AdminCategory = () => {
                 <th scope="col" width="10%" className="text-center" >Tên danh mục</th>
                 <th scope="col"className="text-center" >Mô tả</th>
                 <th scope="col" className="text-center" >Hình ảnh</th>
-                <th scope="col"  className="text-center" width="14%">Cập nhật</th>
+                <th scope="col"  className="text-center" width="14%">Cập nhật cuối</th>
               </tr>
             </thead>
             {isLoading ? (

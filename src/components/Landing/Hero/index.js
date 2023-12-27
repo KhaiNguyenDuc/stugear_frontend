@@ -12,7 +12,7 @@ const Hero = () => {
             <div data-aos="fade-up" data-aos-delay={600}>
               <div className="text-center text-lg-start mt-3">
                 <button className="btn btn-primary">
-                  <Link style={{ textDecoration: "none" }} to="/register">
+                  <Link style={{ textDecoration: "none" }} to={"/register"}>
                     <span className="text-white">Đăng ký</span>
                   </Link>
                 </button>

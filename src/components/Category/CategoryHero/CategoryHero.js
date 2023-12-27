@@ -18,9 +18,9 @@ const CategoryHero = ({ category }) => {
     },
   };
   const carouselCaptionStyles = {
-    background: "rgba(0, 0, 0, 0.8)", // Add background overlay
+    background: "rgba(0, 0, 0, 0.5)", // Add background overlay
     color: "#fff", // Text color
-    textAlign: "start",
+    textAlign: "center",
     padding: "25px",
     top: "50%",
     maxHeight: '115px',

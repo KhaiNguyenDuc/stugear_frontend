@@ -114,6 +114,13 @@ const handleDownload = async () => {
   return (
     <>
       <div style={{ height: "780px" }}>
+      <div>   {isError !== "" ? (
+          <>
+            <span className="text-danger">{isError}</span>
+          </>
+        ) : (
+          <></>
+        )}</div>
       <CSVLink
           data={data}
           headers={headers}
@@ -127,11 +134,7 @@ const handleDownload = async () => {
         >
           Xuất toàn bộ dữ liệu
         </CSVLink>
-      {isError!=="" ? (
-          <><span className="text-danger">{isError}</span></>
-        ): (
-          <></>
-        )}
+    
       <CustomModal
           handleSave={handleChangeStatusSave}
           handleClose={handleChangeStatusClose}
@@ -179,9 +182,17 @@ const handleDownload = async () => {
                           }}
                         >
                           <>
-                            <option value={1}>Mới tạo</option>
+                          {withdraw?.status == "Mới tạo" && withdraw?.status !== "Đã hủy"? (
+                              <><option value={1}>Mới tạo</option></>
+                            ): (
+                              <></>
+                            )}
                             <option value={2}>Đã xử lý hoàn tất</option>
-                            <option value={3}>Đã hủy</option>
+                            {withdraw?.status !== "Đã xử lý hoàn tất" ? (
+                              <option value={3}>Đã hủy</option>
+                            ): (
+                              <></>
+                            )}
                           </>
                         </select>
                       </td>

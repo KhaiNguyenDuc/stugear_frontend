@@ -129,6 +129,7 @@ const UploadProduct = () => {
     if (slug !== undefined) {
       if (!isNaN(slug)) { // Check if slug is a number
         getProductById(slug);
+        setupdated(true);
       } else if (slug.includes("category-id=")) {
         
         const categoryId = slug.split("category-id=")[1];
@@ -137,7 +138,7 @@ const UploadProduct = () => {
         }
         setProduct({...product, category_id: categoryId})
       }
-      setupdated(true);
+      
     }
 
     getAllCategories();
@@ -309,8 +310,8 @@ const UploadProduct = () => {
       progress: undefined,
       theme: "light",
     });
-    setProductCount({...productCount, myProduct: productCount.myProduct + 1})
-    localStorage.setItem("product", productCount.myProduct+1 )
+    setProductCount({...productCount, myProduct: parseInt(productCount.myProduct) + 1})
+    localStorage.setItem("product",  parseInt(productCount.myProduct) + 1 )
     navigate("/member/my-product")
   };
 
@@ -504,7 +505,7 @@ const UploadProduct = () => {
                       id="formFile"
                       name="product_image"
                       required
-                      onChange={(e) => handleFileChange(e)}
+                      onChange={(e) => {handleFileChange(e); setError({ ...isError, image: [] })}}
                     />
                   </div>
                   {isError?.image && (
@@ -646,10 +647,10 @@ const UploadProduct = () => {
               )}
             </div>
           </div>
-          <div style={{ marginLeft: "76%" }} className="mt-5 d-flex">
-            {slug == undefined && (
+          <div  className="mt-5 d-flex" style={{ marginLeft: "76%" }}>
+            {slug == undefined || slug.includes("category-id=") && (
               <>
-                <div className=" mb-3 me-2">
+                <div className=" mb-3 me-2" >
                   <Link
                     style={{ textDecoration: "None", color: "black" }}
                     onClick={(e) => handleDraft(e)}
@@ -666,7 +667,7 @@ const UploadProduct = () => {
                 </div>
               </>
             )}
-            <div className=" mb-3 me-2">
+            <div className="mb-3 me-2">
               <Link
                 style={{ textDecoration: "None", color: "black" }}
                 onClick={(e) => {
@@ -685,7 +686,7 @@ const UploadProduct = () => {
 
             {isUpdated === true ? (
               <>
-                <div className="  mb-3">
+                <div className="mb-3">
                   <Link
                     style={{ textDecoration: "None", color: "black" }}
                     onClick={() => setShow(true)}
