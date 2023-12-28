@@ -72,13 +72,13 @@ const ProductCard = ({ product }) => {
                 >
                   {product.origin_price}
                 </span>
-                <span style={{ fontSize: "20px", color: "red", fontWeight: 'bold' }}>
+                <span style={{ fontSize: "17px", color: "red", fontWeight: 'bold' }}>
                   {product.price}
                 </span>
               </>
             ) : (
               <>
-                <b style={{ fontSize: "20px", marginLeft: '50%'}}>
+                <b style={{ fontSize: "17px", marginLeft: '50%'}}>
                   {product.price}
                 </b>
               </>

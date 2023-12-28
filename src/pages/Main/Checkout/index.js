@@ -93,7 +93,7 @@ const CheckoutPage = () => {
         localStorage.setItem("balance", balanceResponse.balance);
         setUser({ ...user, balance: balanceResponse.balance });
       }
-
+      await UserService.updateUserProfile({full_address: address});
       navigate(`/member/order-detail/${response?.order_id}`);
     } else {
       setError(response?.data?.message);
