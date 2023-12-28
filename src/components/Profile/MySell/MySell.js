@@ -3,14 +3,24 @@ import UserService from "../../../service/UserService";
 import "./MySell.css";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../Loading";
-
+import useProduct from "../../../hooks/useProduct";
 const MySell = () => {
+  const {productCount, setProductCount} = useProduct()
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const getOrders = async () => {
     setLoading(true);
     const response = await UserService.getCurrentUserOrders();
+    
+    
+    let orderCount = response?.total_items;
+    localStorage.setItem("order", parseInt(orderCount))
+    setProductCount({
+      ...productCount,
+      myOrder: orderCount,
+    });
+ 
     console.log(response);
     if (response?.status !== 400) {
       setOrders(response?.data);

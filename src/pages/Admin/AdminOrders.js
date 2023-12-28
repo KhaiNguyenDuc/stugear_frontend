@@ -177,10 +177,10 @@ const AdminOrder = () => {
                         {order?.id}
                       </th>
                       <td className="text-center">
-                        <UserModal userId={order?.seller_id} />
+                        <UserModal userId={order?.buyer_id} />
                       </td>
                       <td className="text-center">
-                        <UserModal userId={order?.buyer_id} />
+                        <UserModal userId={order?.seller_id} />
                       </td>
                       <td>{order?.product_name}</td>
                       <td className="text-center">
