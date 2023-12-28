@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./UserModal.css";
 import UserService from "../../../service/UserService";
 import Modal from "react-modal";
-
+import Loading from "../../Loading/index"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAddressCard,
@@ -21,25 +21,25 @@ const UserModal = ({ userId }) => {
   const [reportMessage, setReportMessage] = useState("");
   const [selectedImageUrl, setSelectedImageUrl] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const [isLoading, setLoading] = useState(false)
   const handleChange = (e) => {
     setReportContent(e.target.value);
   };
   const getUserById = async (id) => {
+    setLoading(true)
     const response = await UserService.getUserById(id);
-    console.log(response);
+
     if (response?.status !== 400) {
       setUser(response[0]);
     }
+    setLoading(false)
   };
 
-  useEffect(() => {
-    getUserById(userId);
-  }, [userId]);
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
+    getUserById(userId);
     setIsOpen(true);
   }
 
@@ -97,7 +97,7 @@ const UserModal = ({ userId }) => {
     <>
       <Link onClick={openModal}>
         <img
-          src={`http://localhost:8000/api/users/${user?.id}/images`}
+          src={`http://localhost:8000/api/users/${userId}/images`}
           className="pic rounded-circle"
           style={{ width: "40px", height: "40px" }}
           alt=""
@@ -109,7 +109,11 @@ const UserModal = ({ userId }) => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        {reportShow ? (
+        {isLoading ? (
+          <><Loading/></>
+        ): (
+          <>
+                  {reportShow ? (
           <>
             <div className="row media ">
               <div className="col">
@@ -276,6 +280,9 @@ const UserModal = ({ userId }) => {
             </section>
           </>
         )}
+          </>
+        )}
+
       </Modal>
     </>
   );

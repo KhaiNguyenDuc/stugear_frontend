@@ -327,6 +327,11 @@ const UploadProduct = () => {
   const [selectedFile, setSelectedFile] = useState();
   const handleDelete = async () => {
     const response = await ProductService.deleteProduct(product?.id);
+    setProductCount({
+      ...productCount,
+      myProduct: parseInt(productCount.myProduct) - 1,
+    });
+    localStorage.setItem("product", parseInt(productCount.myProduct) - 1);
     navigate("/member/my-product");
   };
 
@@ -661,7 +666,7 @@ const UploadProduct = () => {
           </div>
           <div className="mt-5 d-flex" style={{ marginLeft: "76%" }}>
             {slug == undefined ||
-              (slug.includes("category-id=") && (
+              slug.includes("category-id=") ? (
                 <>
                   <div className=" mb-3 me-2">
                     <Link
@@ -679,7 +684,7 @@ const UploadProduct = () => {
                     </Link>
                   </div>
                 </>
-              ))}
+              ): (<></>)}
             <div className="mb-3 me-2">
               <Link
                 style={{ textDecoration: "None", color: "black" }}
@@ -688,11 +693,12 @@ const UploadProduct = () => {
                     handleUpdate(e);
                   } else handleSubmit(e);
                 }}
-              >
-                <button className="product-edit ">
-                  {" "}
-                  <FontAwesomeIcon icon={faPencil} /> Đăng
-                </button>
+              > 
+           <button className="product-edit">
+                {" "}
+                <FontAwesomeIcon icon={faPencil} /> Đăng
+              </button>
+             
               </Link>
             </div>
 

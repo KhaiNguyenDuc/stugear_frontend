@@ -36,7 +36,8 @@ const ProductDetail = ({ product, isMember }) => {
         progress: undefined,
         theme: "light",
       });
-      setProductCount({...productCount, wishlist: productCount.wishlist+1})
+      localStorage.setItem("wishlist", parseInt(productCount.wishlist)+ 1)
+      setProductCount({...productCount, wishlist: parseInt(productCount.wishlist)+ 1})
     }
   };
   const hanldeCheckout=(e, productId) => {
