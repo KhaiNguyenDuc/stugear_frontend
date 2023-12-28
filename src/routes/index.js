@@ -193,7 +193,7 @@ function useRouteElements () {
       children: [
         {
           path: '/admin/',
-          element:  <AdminUser/>
+          element:  <AdminCategory/>
         },
         {
           path: '/admin/users',

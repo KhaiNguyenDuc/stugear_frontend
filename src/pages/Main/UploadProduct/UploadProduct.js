@@ -25,7 +25,7 @@ import CustomModal from "../../../components/Modal/Modal";
 // "đã thanh toán": "5"
 import Modal from "react-modal";
 const UploadProduct = () => {
-  const {productCount, setProductCount} = useProduct()
+  const { productCount, setProductCount } = useProduct();
   let { slug } = useParams();
   const navigate = useNavigate();
   const [isError, setError] = useState([]);
@@ -114,7 +114,7 @@ const UploadProduct = () => {
       brand: response?.brand,
       status: response?.status === "Chờ duyệt" ? 2 : 1, // chờ duyệt
       origin_price: originPrice,
-      category_id: response?.category_id == null ? 1: response?.category_id,
+      category_id: response?.category_id == null ? 1 : response?.category_id,
       transaction_id: response?.transaction_method === "Trên trang web" ? 2 : 1,
       description: response?.description,
       product_image: response?.product_image,
@@ -123,24 +123,29 @@ const UploadProduct = () => {
     });
     console.log(product);
   };
+  const validate = async (categoryId) => {
+    // Check if categoryId exists in the categories array
+    const isExist = await CategoryService.getCategoriesById(categoryId);
 
+    if (isExist?.status === 404) {
+      navigate("/not-found");
+    }
+  };
   useEffect(() => {
     setLoading(true);
+    
     if (slug !== undefined) {
-      if (!isNaN(slug)) { // Check if slug is a number
+      if (!isNaN(slug)) {
+        // Check if slug is a number
         getProductById(slug);
         setupdated(true);
       } else if (slug.includes("category-id=")) {
-        
         const categoryId = slug.split("category-id=")[1];
-        if(categoryId !== "1" && categoryId !== "2" && categoryId !== "3"){
-          navigate("/not-found")
-        }
-        setProduct({...product, category_id: categoryId})
-      }
-      
-    }
+        validate(categoryId);
 
+        setProduct({ ...product, category_id: categoryId });
+      }
+    }
     getAllCategories();
     getAllTags();
     setLoading(false);
@@ -193,19 +198,22 @@ const UploadProduct = () => {
       progress: undefined,
       theme: "light",
     });
-    setProductCount({...productCount, myProduct: parseInt(productCount.myProduct)+1 })
-    localStorage.setItem("product", parseInt(productCount.myProduct)+1 )
-     navigate("/member/my-product")
+    setProductCount({
+      ...productCount,
+      myProduct: parseInt(productCount.myProduct) + 1,
+    });
+    localStorage.setItem("product", parseInt(productCount.myProduct) + 1);
+    navigate("/member/my-product");
   };
   const handleUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
     setProduct({ ...product, status: 2 });
     if (product?.product_image === "") {
-      setError({...isError, image: ["Vui lòng chọn hình ảnh"]})
-      return
+      setError({ ...isError, image: ["Vui lòng chọn hình ảnh"] });
+      return;
     }
-    
+
     const response = await ProductService.updateProduct(product);
     if (response?.status === "success") {
       const formData = new FormData();
@@ -213,7 +221,7 @@ const UploadProduct = () => {
         formData.append("image", selectedFile);
         await ProductService.uploadImage(product?.id, formData);
       }
-      
+
       const newItems = selected.filter((item) => item.__isNew__);
       const tag_ids = await TagService.createTags(
         newItems.map((item) => item.value)
@@ -225,19 +233,18 @@ const UploadProduct = () => {
       );
       setLoading(false);
       navigate(`/home-page/product-detail/${product?.id}`);
-    }else{
+    } else {
       if (response?.data?.error) {
         let translatedErrors = {};
         for (const key in response.data.error) {
           translatedErrors[key] = response.data.error[key].map(translateError);
         }
-        setError(translatedErrors); 
+        setError(translatedErrors);
       }
       setLoading(false);
       return;
     }
     await ProductService.updateStatus(product?.id, 2);
-    
   };
   const errorTranslations = {
     "The name field is required.": "Tên là bắt buộc.",
@@ -246,20 +253,19 @@ const UploadProduct = () => {
     "The origin price field is required.": "Giá gốc là bắt buộc.",
     "The origin price field must be at least 1.": "Giá gốc phải lớn hơn 1000",
     "The price field must be at least 1.": "Giá bán phải lớn hơn 1000",
-    "The name field must be a string.": "Tên là bắt buộc"
+    "The name field must be a string.": "Tên là bắt buộc",
   };
-  
-  const translateError = (englishError) => {
 
-    return errorTranslations[englishError] || englishError; 
+  const translateError = (englishError) => {
+    return errorTranslations[englishError] || englishError;
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setProduct({ ...product, status: 2 });
     if (selectedFile === undefined) {
-      setError({...isError, image: ["Vui lòng chọn hình ảnh"]})
-      return
+      setError({ ...isError, image: ["Vui lòng chọn hình ảnh"] });
+      return;
     }
     const response = await ProductService.createProduct(product);
     if (response?.status === 400) {
@@ -268,7 +274,7 @@ const UploadProduct = () => {
         for (const key in response.data.error) {
           translatedErrors[key] = response.data.error[key].map(translateError);
         }
-        setError(translatedErrors); 
+        setError(translatedErrors);
       }
       setLoading(false);
       return;
@@ -280,14 +286,13 @@ const UploadProduct = () => {
         const formData = new FormData();
         formData.append("image", selectedFile);
         await ProductService.uploadImage(productId, formData);
-      }else{
-        setError({...isError, image: ["Vui lòng chọn hình ảnh"]})
+      } else {
+        setError({ ...isError, image: ["Vui lòng chọn hình ảnh"] });
       }
     } else {
       console.log("Some thing went wrong");
       return;
     }
-
 
     const newItems = selected.filter((item) => item.__isNew__);
     const tag_ids = await TagService.createTags(
@@ -310,9 +315,12 @@ const UploadProduct = () => {
       progress: undefined,
       theme: "light",
     });
-    setProductCount({...productCount, myProduct: parseInt(productCount.myProduct) + 1})
-    localStorage.setItem("product",  parseInt(productCount.myProduct) + 1 )
-    navigate("/member/my-product")
+    setProductCount({
+      ...productCount,
+      myProduct: parseInt(productCount.myProduct) + 1,
+    });
+    localStorage.setItem("product", parseInt(productCount.myProduct) + 1);
+    navigate("/member/my-product");
   };
 
   const [selected, setSelected] = useState([]);
@@ -332,9 +340,7 @@ const UploadProduct = () => {
 
   return (
     <>
-
       <div className="card my-5 p-5">
-      
         <form style={{ minHeight: "1100px" }}>
           <div className="row product-type my-5 ">
             <div className="col-5 text-start">
@@ -346,7 +352,9 @@ const UploadProduct = () => {
             </div>
 
             <div className="col">
-              <h5>Danh mục <span className="require">*</span></h5>
+              <h5>
+                Danh mục <span className="require">*</span>
+              </h5>
               <select
                 class="form-select"
                 aria-label="Default select example"
@@ -355,7 +363,6 @@ const UploadProduct = () => {
                 onChange={(e) => handleChange(e)}
                 value={product.category_id}
               >
-                
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
@@ -468,7 +475,9 @@ const UploadProduct = () => {
                   </div>
                 </div>
                 <div className="col mt-4">
-                  <h5>Phiên bản <span className="require">*</span></h5>
+                  <h5>
+                    Phiên bản <span className="require">*</span>
+                  </h5>
                   <div className="my-3 input-group">
                     <span className="input-group-text">
                       {" "}
@@ -505,7 +514,10 @@ const UploadProduct = () => {
                       id="formFile"
                       name="product_image"
                       required
-                      onChange={(e) => {handleFileChange(e); setError({ ...isError, image: [] })}}
+                      onChange={(e) => {
+                        handleFileChange(e);
+                        setError({ ...isError, image: [] });
+                      }}
                     />
                   </div>
                   {isError?.image && (
@@ -647,26 +659,27 @@ const UploadProduct = () => {
               )}
             </div>
           </div>
-          <div  className="mt-5 d-flex" style={{ marginLeft: "76%" }}>
-            {slug == undefined || slug.includes("category-id=") && (
-              <>
-                <div className=" mb-3 me-2" >
-                  <Link
-                    style={{ textDecoration: "None", color: "black" }}
-                    onClick={(e) => handleDraft(e)}
-                  >
-                    <button className="product-draft">
-                      {" "}
-                      <FontAwesomeIcon
-                        icon={faDraftingCompass}
-                        className="me-2"
-                      />{" "}
-                      Lưu bản nháp
-                    </button>
-                  </Link>
-                </div>
-              </>
-            )}
+          <div className="mt-5 d-flex" style={{ marginLeft: "76%" }}>
+            {slug == undefined ||
+              (slug.includes("category-id=") && (
+                <>
+                  <div className=" mb-3 me-2">
+                    <Link
+                      style={{ textDecoration: "None", color: "black" }}
+                      onClick={(e) => handleDraft(e)}
+                    >
+                      <button className="product-draft">
+                        {" "}
+                        <FontAwesomeIcon
+                          icon={faDraftingCompass}
+                          className="me-2"
+                        />{" "}
+                        Lưu bản nháp
+                      </button>
+                    </Link>
+                  </div>
+                </>
+              ))}
             <div className="mb-3 me-2">
               <Link
                 style={{ textDecoration: "None", color: "black" }}
@@ -678,8 +691,7 @@ const UploadProduct = () => {
               >
                 <button className="product-edit ">
                   {" "}
-                  <FontAwesomeIcon icon={faPencil} />{" "}
-                  Đăng
+                  <FontAwesomeIcon icon={faPencil} /> Đăng
                 </button>
               </Link>
             </div>

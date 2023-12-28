@@ -64,7 +64,7 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
           <div class="card-text">
-            {product?.origin_price != "0 VNĐ" ? (
+            {parseInt(product?.origin_price) > parseInt(product.price) ? (
               <>
                 <span
                   className="me-4"
@@ -72,15 +72,15 @@ const ProductCard = ({ product }) => {
                 >
                   {product.origin_price}
                 </span>
-                <span style={{ fontSize: "17px", color: "red", fontWeight: 'bold' }}>
+                <span style={{ fontSize: "20px", color: "red", fontWeight: 'bold' }}>
                   {product.price}
                 </span>
               </>
             ) : (
               <>
-                <span style={{ fontSize: "20px", color: "red" }}>
+                <b style={{ fontSize: "20px", marginLeft: '50%'}}>
                   {product.price}
-                </span>
+                </b>
               </>
             )}
           </div>

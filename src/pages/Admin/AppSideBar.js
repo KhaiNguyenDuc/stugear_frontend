@@ -57,6 +57,13 @@ const AppSideBar = ({ toggleSidebar }) => {
           </button>
 
           <nav className="list-group">
+          <NavLink className="list-group-item" to={"/admin/categories"}>
+              <FontAwesomeIcon
+                icon={faTicket}
+                style={{ marginRight: "10px" }}
+              />{" "}
+              Danh mục
+            </NavLink>
             <NavLink
               className="list-group-item with-badge"
               to={"/admin/users"}
@@ -101,13 +108,7 @@ const AppSideBar = ({ toggleSidebar }) => {
               />{" "}
               Đơn hàng
             </NavLink>
-            <NavLink className="list-group-item" to={"/admin/categories"}>
-              <FontAwesomeIcon
-                icon={faTicket}
-                style={{ marginRight: "10px" }}
-              />{" "}
-              Danh mục
-            </NavLink>
+
           </nav>
         </div>
       </nav>
