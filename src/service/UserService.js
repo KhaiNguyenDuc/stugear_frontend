@@ -91,6 +91,9 @@ class UserService {
       .catch((error) => error?.response);
   }
   updateUserProfile(userInfo) {
+    if(userInfo?.gender === ""){
+      userInfo.gender = 0
+    }
     return axiosPrivate
       .patch(USER_URL + "/info", {
         first_name: userInfo?.first_name,

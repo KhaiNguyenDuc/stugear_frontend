@@ -16,7 +16,7 @@ import useAuth from "../../../hooks/useAuth";
 import { ToastContainer, toast } from "react-toastify";
 import DatePicker from "react-date-picker";
 const General = () => {
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({gender: 0});
   const { user, setUser } = useAuth();
   const [isUpdated, setUpdated] = useState(false);
   const [isEdit, setEdit] = useState(false);
@@ -36,6 +36,7 @@ const General = () => {
   const handleChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
+  console.log(userInfo)
   const handleFileChange = async (e) => {
     await UserService.uploadImage(user?.user_id, e.target.files[0]);
     setUser({
@@ -48,6 +49,7 @@ const General = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setEdit(false);
+
     const response = await UserService.updateUserProfile(userInfo);
     if(response?.status != 400){
     setUpdated(true);
@@ -63,8 +65,8 @@ const General = () => {
         theme: "light",
       });
     }else{
-    setUpdated(true);
-      console("Wrong ")
+      setUpdated(true);
+   
     }
   
   };
@@ -267,6 +269,7 @@ const General = () => {
             <span className="me-3 mt-2">Ngày sinh: </span>
             <DatePicker
                 format="dd-MM-y"
+                required
                 onChange={(date) => handleDateChange(date)}
                 selected={userInfo.birthdate} 
                 value={userInfo.birthdate}
