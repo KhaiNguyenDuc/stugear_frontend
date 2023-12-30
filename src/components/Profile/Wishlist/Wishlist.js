@@ -36,14 +36,14 @@ const Wishlist = () => {
               
               {isLoading ? (
                 <Loading />
-              ) : wishlists.length === 0 ? (
+              ) : wishlists?.length === 0 ? (
                 <tr className="text-center">
                   <td>Không có sản phẩm nào trong mục yêu thích</td>
                 </tr>
               ) :  (
                 <>
                   {wishlists?.map((item) => (
-                    <WishlistItem key={item.id} item={item} setKey={setKey}/>
+                    <WishlistItem key={item?.id} item={item} setKey={setKey}/>
                   ))}
                 </>
               )}
