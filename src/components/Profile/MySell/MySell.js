@@ -44,7 +44,7 @@ const MySell = () => {
           </>
         ) : (
           <>
-            {orders.length == 0 ? (
+            {orders?.length == 0 ? (
               <>
                 <p className="my-1 text-center">
                   Không có đơn hàng nào đang bán
@@ -94,17 +94,17 @@ const MySell = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {orders.map((item) => {
+                    {orders?.map((item) => {
                       return (
                         <tr>
-                          <td>{item.id}</td>
-                          <td>{item.product_title}</td>
-                          <td>{item.status}</td>
-                          <td>{item.created_date}</td>
+                          <td>{item?.id}</td>
+                          <td>{item?.product_title}</td>
+                          <td>{item?.status}</td>
+                          <td>{item?.created_date}</td>
                           <td>
                             <button
                               className="btn"
-                              onClick={(e) => hanldeViewDetail(e, item.id)}
+                              onClick={(e) => hanldeViewDetail(e, item?.id)}
                             >
                               Chi tiết
                             </button>

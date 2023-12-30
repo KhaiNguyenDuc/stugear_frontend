@@ -97,14 +97,14 @@ const UserModal = ({ userId }) => {
   };
   return (
     <>
-      <div onClick={openModal}>
+      <span onClick={openModal}>
         <img
           src={`http://localhost:8000/api/users/${userId}/images`}
           className="hover-effect pic rounded-circle"
           style={{ width: "40px", height: "40px" }}
           alt=""
         />
-      </div>
+      </span>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
