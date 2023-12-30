@@ -172,7 +172,7 @@ const AdminUser = () => {
                           <img
                             src={product.product_image}
                             alt=""
-                            className="admin-small-img"
+                            className="hover-effect admin-small-img"
                             style={{ width: "90%", height: "100px" }}
                           />
                         </Link>

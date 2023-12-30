@@ -108,7 +108,7 @@ const UploadProduct = () => {
       id: response?.id,
       name: response?.title,
       price: price,
-      condition: response?.condition === "Đã sử dụng" ? 1 : 2,
+      condition: response?.condition === "Cũ" ? 1 : 2,
       edition: response?.edition,
       quantity: response?.quantity,
       brand: response?.brand,
@@ -557,19 +557,20 @@ const UploadProduct = () => {
                       className="input-group-text"
                       htmlFor="inputGroupSelect01"
                     >
-                      Trạng thái
+                      Trạng thái <span className="require"> *</span>
                     </label>
                   </div>
                   <select
                     className="custom-select w-50 "
                     id="inputGroupSelect01"
-                    required
+                    name="condition"
+                    
                     onChange={(e) => handleChange(e)}
                     value={product.condition}
                   >
                     <option selected>Chọn...</option>
-                    <option value="1">Đã sử dụng</option>
-                    <option value="2">Chưa sử dụng</option>
+                    <option value={1}>Cũ</option>
+                    <option value={2}>Mới</option>
                   </select>
                 </div>
               </div>
@@ -664,7 +665,11 @@ const UploadProduct = () => {
               )}
             </div>
           </div>
-          <div className="mt-5 d-flex" style={{ marginLeft: "76%" }}>
+          {isLoading ? (
+            <><Loading/></>
+          ): (
+            <>
+               <div className="mt-5 d-flex" style={{ marginLeft: "76%" }}>
             {slug == undefined ||
               slug.includes("category-id=") ? (
                 <>
@@ -721,6 +726,9 @@ const UploadProduct = () => {
               <></>
             )}
           </div>
+            </>
+          )}
+       
         </form>
 
         {isAdded ? (

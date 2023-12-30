@@ -40,7 +40,7 @@ const AdminOrder = () => {
 
   useEffect(() => {
     loadData();
-  }, [currentPage]);
+  }, []);
 
   const handleChangeStatusClose = () => {
     setChangeStatusShow(false);

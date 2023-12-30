@@ -232,7 +232,7 @@ const AdminCategory = () => {
                         <img
                           src={category.image}
                           alt=""
-                          className="admin-small-img"
+                          className="hover-effect admin-small-img"
                           style={{ width: "90%", height: "100px" }}
                         />
                       </Link>
