@@ -6,7 +6,11 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 import Loading from "../Loading/index"
+import UserService from "../../service/UserService";
+import useProduct from "../../hooks/useProduct";
+
 const OauthSection = ({ text }) => {
+  const {productCount, setProductCount} = useProduct()
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false)
   const [isError, setError] = useState("")
@@ -24,11 +28,40 @@ const OauthSection = ({ text }) => {
     });
   };
 
+  const getUserInfo = async () => {
+    let wishlistCount = 0;
+    let orderCount = 0;
+    let productCount = 0;
+    const wishlistResponse = await UserService.getCurrentUserWishlist();
+    if (wishlistResponse?.status != 400) {
+      wishlistCount = wishlistResponse?.length;
+      localStorage.setItem("wishlist", wishlistCount)
+    }
+
+    const orderResponse = await UserService.getCurrentUserOrders();
+    if (orderResponse?.status != 400) {
+      orderCount = orderResponse?.total_items;
+      localStorage.setItem("order", orderCount)
+    }
+
+    const productResponse = await UserService.getCurrentUserProducts();
+    if (productResponse?.status != 400) {
+      productCount = productResponse?.total_items;
+      localStorage.setItem("product", productCount)
+    }
+
+    setProductCount({
+      ...productCount,
+      wishlist: wishlistCount,
+      myProduct: productCount,
+      myOrder: orderCount,
+    });
+  };
   const handleCreateAccount = async (oauthUser) => {
     setLoading(true)
     await AuthService.register(oauthUser);
 
-    const response = await AuthService.login(oauthUser);
+    let response = await AuthService.login(oauthUser);
     if(response.status === 401){
       setError("Email này đã được đăng ký")
       setLoading(false)
@@ -45,6 +78,11 @@ const OauthSection = ({ text }) => {
     localStorage.setItem("user_id", userId);
     localStorage.setItem("username", username);
     localStorage.setItem("roles", roles);
+    const balanceResponse = await UserService.getCurrentUserBalance();
+    if (balanceResponse.status !== 400) {
+      localStorage.setItem("balance", balanceResponse.balance);
+    }
+    response = { ...response, balance: balanceResponse.balance };
     setUser(response);
     localStorage.setItem(
       "user_image",
@@ -54,6 +92,8 @@ const OauthSection = ({ text }) => {
       ...response,
       user_image: `http://localhost:8000/api/users/${response?.user_id}/images`,
     });
+
+    await getUserInfo()
     setLoading(false)
 
     if (roles.includes("ADMIN")) {

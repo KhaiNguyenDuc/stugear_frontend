@@ -55,10 +55,18 @@ const ProductPage = () => {
     getProductById(slug);
     getRelateProduct()
   }, [slug]);
-
+  const [isError, setError] = useState()
   const handleDelete = async () => {
-    await ProductService.deleteProduct(product?.id);
-;
+    const response = await ProductService.deleteProduct(product?.id);
+    console.log(response)
+    if(response?.status === 400){
+      setError(response?.data?.message)
+      
+      return
+    }else{
+      setProductCount({...productCount, myProduct: productCount.myProduct-1})
+      localStorage.setItem("product", productCount.myProduct-1)
+    }
 
     navigate("/home-page/category/1");
   };
@@ -68,9 +76,9 @@ const ProductPage = () => {
     setShow(false);
   };
   const handleSave = () => {
-    setProductCount({...productCount, myProduct: productCount.myProduct-1})
-    localStorage.setItem("product", productCount.myProduct-1)
+
     handleDelete();
+    setShow(false)
 
   };
   return (
@@ -79,7 +87,7 @@ const ProductPage = () => {
         <Loading />
       ) : (
         <>
-          {isOwner === true && product?.status !== "Đã duyệt" ? (
+          {isOwner === true && product?.status === "Chờ duyệt" ? (
             <>
               <div
                 className="product-status mb-5 rounded-xl1"
@@ -149,10 +157,13 @@ const ProductPage = () => {
                         style={{ textDecoration: "None", color: "black" }}
                         onClick={() => setShow(true)}
                       >
-                        <button className="product-remove">
+                        <button className="product-remove mb-2">
                           <FontAwesomeIcon icon={faTrash} className="me-2" />{" "}
                           Xóa sản phẩm
                         </button>
+                        {isError && (
+                          <><span className="text-danger">{isError}</span></>
+                        )}
                       </Link>
                     </div>
                   </div>

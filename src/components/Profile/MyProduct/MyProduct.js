@@ -33,7 +33,7 @@ const MyProduct = () => {
 
   const handleProductLink = (status, id) =>{
     
-    if (status==="Đã duyệt"){
+    if (status==="Đã duyệt" || status === "Đã bán"){
       return `/home-page/product-detail/${id}` 
     }else if (status ==="Chờ duyệt"){
       return `/home-page/product-detail/${id}` 
