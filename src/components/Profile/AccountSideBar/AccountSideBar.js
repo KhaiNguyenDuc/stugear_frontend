@@ -85,7 +85,7 @@ const AccountSideBar = () => {
         {isLoading ? (
           <Loading/>
         ): (
-          <img src={user?.user_image} alt="User" />
+          <img src={user?.user_image} alt="User" className="hover-effect" />
         )}
         
         </div>

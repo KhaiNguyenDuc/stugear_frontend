@@ -21,20 +21,22 @@ const UserModal = ({ userId }) => {
   const [reportMessage, setReportMessage] = useState("");
   const [selectedImageUrl, setSelectedImageUrl] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isLoading, setLoading] = useState(false)
+  const [isUserLoading, setUserLoading] = useState(false)
   const handleChange = (e) => {
     setReportContent(e.target.value);
   };
   const getUserById = async (id) => {
-    setLoading(true)
+    setUserLoading(true)
     const response = await UserService.getUserById(id);
 
     if (response?.status !== 400) {
       setUser(response[0]);
     }
-    setLoading(false)
+    setUserLoading(false)
   };
-
+  // useEffect(() => {
+  //   getUserById(userId)
+  // }, [])
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -95,21 +97,21 @@ const UserModal = ({ userId }) => {
   };
   return (
     <>
-      <Link onClick={openModal}>
+      <div onClick={openModal}>
         <img
           src={`http://localhost:8000/api/users/${userId}/images`}
-          className="pic rounded-circle"
+          className="hover-effect pic rounded-circle"
           style={{ width: "40px", height: "40px" }}
           alt=""
         />
-      </Link>
+      </div>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
       >
-        {isLoading ? (
+        {isUserLoading ? (
           <><Loading/></>
         ): (
           <>
