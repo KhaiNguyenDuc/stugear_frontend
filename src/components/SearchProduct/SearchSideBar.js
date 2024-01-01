@@ -249,7 +249,7 @@ const SearchSideBar = ({
             <h5 className="mb-3">Giá</h5>
             <MultiRangeSlider
               min={0}
-              max={1000000}
+              max={4000000}
               onChange={({ min, max }) => handlePrice({ min, max })}
             />
           </div>

@@ -64,7 +64,7 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
           <div class="card-text">
-            {parseInt(product?.origin_price) > parseInt(product.price) ? (
+            {parseInt(product?.origin_price) > parseInt(product?.price) ? (
               <>
                 <span
                   className="me-4"
