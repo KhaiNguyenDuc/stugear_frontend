@@ -55,6 +55,15 @@ const Category = ({ category }) => {
 
         <div>
       <table className="table table-borderless table-striped table-hover">
+        <thead>
+        <tr>
+                <th scope="col" width="25%" className="text-center">Sản phẩm</th>
+                <th scope="col" width="15%" className="text-center">Thẻ</th>
+                <th scope="col" className="text-center" width="8%">Bình Luận</th>
+                <th scope="col"  className="text-center" width="8%" >Giá</th>
+                <th scope="col" width="7%">Ngày đăng</th>
+              </tr>
+        </thead>
         <tbody>
         <>
   {isLoading ? (

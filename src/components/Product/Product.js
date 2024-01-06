@@ -34,20 +34,15 @@ const Product = ({ product }) => {
         </div>
       </td>
 
-      <td className="align-middle">
+      <td className="align-middle text-center">
         <Link style={{ textDecoration: 'none' }} className="badge bg-primary ">
           <FontAwesomeIcon icon={faMessage} /> {product.comment_count}
         </Link>
       </td>
       <td className="align-middle">
-        <p className="m-0">{product.price}</p>
+        <p className="m-0 ms-3">{product.price}</p>
       </td>
-      <td className="align-middle">
-        <Link>
-          {' '}
-          <img className="small-image rounded" src={product.avatar} alt="" />
-        </Link>
-      </td>
+
       <td className="align-middle">
         <span>{product.last_updated}</span>
       </td>
