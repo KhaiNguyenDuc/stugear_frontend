@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./LeaveComment.css";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import ProductService from "../../../service/ProductService";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -127,7 +126,7 @@ const LeaveComment = ({ productId, setKey, isUnApproved }) => {
                     className="btn btn-success send"
                     onClick={(e) => handleComment(e)}
                   >
-                    Gửi <FontAwesomeIcon icon={faArrowRight} />
+                    Gửi <FontAwesomeIcon icon="arrow-right" />
                   </button>
                   {error && <div className="alert alert-danger text-center mt-2">{error}</div>}
                 </div>

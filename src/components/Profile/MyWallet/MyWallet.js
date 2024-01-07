@@ -3,7 +3,6 @@ import "./MyWallet.css"; // Importing the CSS file
 
 import useAuth from "../../../hooks/useAuth";
 import PaymentService from "../../../service/PaymentService";
-import { useNavigate } from "react-router-dom";
 import usePayment from "../../../hooks/usePayment";
 import Loading from "../../Loading";
 import UserService from "../../../service/UserService";

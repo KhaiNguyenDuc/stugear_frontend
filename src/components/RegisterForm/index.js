@@ -1,12 +1,5 @@
 import "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faEnvelope,
-  faLock,
-  faEyeSlash,
-  faEye,
-} from "@fortawesome/free-solid-svg-icons";
 import OauthSection from "../OauthSection";
 import Divider from "../../components/Divider";
 import { useState } from "react";
@@ -95,7 +88,7 @@ const RegisterForm = () => {
               <div className="col my-3 input-group flex-nowrap">
                 <span className="input-group-text">
                   {" "}
-                  <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon="user" />
                 </span>
                 <input
                   required
@@ -115,7 +108,7 @@ const RegisterForm = () => {
               <div className="col my-3 input-group flex-nowrap">
                 <span className="input-group-text">
                   {" "}
-                  <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon="user" />
                 </span>
                 <input
                   required
@@ -130,7 +123,7 @@ const RegisterForm = () => {
               <div className="col my-3 input-group flex-nowrap">
                 <span className="input-group-text">
                   {" "}
-                  <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon="user" />
                 </span>
                 <input
                   required
@@ -153,7 +146,7 @@ const RegisterForm = () => {
               <div className="col my-3 input-group flex-nowrap">
                 <span className="input-group-text">
                   {" "}
-                  <FontAwesomeIcon icon={faEnvelope} />
+                  <FontAwesomeIcon icon="envelope" />
                 </span>
                 <input
                   required
@@ -174,7 +167,7 @@ const RegisterForm = () => {
               <div className="col my-3 input-group flex-nowrap">
                 <span className="input-group-text">
                   {" "}
-                  <FontAwesomeIcon icon={faLock} />
+                  <FontAwesomeIcon icon="lock" />
                 </span>
                 <input
                   required
@@ -189,7 +182,7 @@ const RegisterForm = () => {
                   className="input-group-text"
                   onClick={togglePasswordVisibility}
                 >
-                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                  <FontAwesomeIcon icon={showPassword ? "eye-slash" : "eye"} />
                 </span>
               </div>
               {error.field === "password" && (
@@ -201,7 +194,7 @@ const RegisterForm = () => {
               <div className="col my-3 input-group flex-nowrap">
                 <span className="input-group-text">
                   {" "}
-                  <FontAwesomeIcon icon={faLock} />
+                  <FontAwesomeIcon icon="lock" />
                 </span>
                 <input
                   required
@@ -216,7 +209,7 @@ const RegisterForm = () => {
                   className="input-group-text"
                   onClick={toggleConfirmPasswordVisibility}
                 >
-                  <FontAwesomeIcon icon={showConFirmPassword ? faEyeSlash : faEye} />
+                  <FontAwesomeIcon icon={showConFirmPassword ? "eye-slash" : "eye"} />
                 </span>
               </div>
             </div>

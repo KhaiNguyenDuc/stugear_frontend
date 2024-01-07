@@ -1,21 +1,10 @@
-import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faBook,
-  faCartShopping,
-  faFlag,
-  faMoneyBill,
-  faSection,
-  faTicket,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../../hooks/useAuth";
 import "./AdminSideBar.css";
 import { useNavigate } from "react-router-dom";
 
-const AppSideBar = ({ toggleSidebar }) => {
+const AdminSideBar = () => {
   const navigate = useNavigate();
   
   const { user, setUser } = useAuth();
@@ -59,7 +48,7 @@ const AppSideBar = ({ toggleSidebar }) => {
           <nav className="list-group">
           <NavLink className="list-group-item" to={"/admin/categories"}>
               <FontAwesomeIcon
-                icon={faTicket}
+                icon="ticket"
                 style={{ marginRight: "10px" }}
               />{" "}
               Danh mục
@@ -68,12 +57,12 @@ const AppSideBar = ({ toggleSidebar }) => {
               className="list-group-item with-badge"
               to={"/admin/users"}
             >
-              <FontAwesomeIcon icon={faUser} style={{ marginRight: "10px" }} />{" "}
+              <FontAwesomeIcon icon="user" style={{ marginRight: "10px" }} />{" "}
               Người dùng
             </NavLink>
             <NavLink className="list-group-item" to={"/admin/products"}>
               <FontAwesomeIcon
-                icon={faBook}
+                icon="book"
                 style={{ marginRight: "10px" }}
               />{" "}
               Sản phẩm
@@ -83,7 +72,7 @@ const AppSideBar = ({ toggleSidebar }) => {
               to={"/admin/reports"}
             >
               <FontAwesomeIcon
-                icon={faFlag}
+                icon="flag"
                 style={{ marginRight: "10px" }}
               />{" "}
               Đơn tố cáo
@@ -93,7 +82,7 @@ const AppSideBar = ({ toggleSidebar }) => {
               to={"/admin/withdraws"}
             >
               <FontAwesomeIcon
-                icon={faMoneyBill}
+                icon="money-bill"
                 style={{ marginRight: "10px" }}
               />{" "}
               Yêu cầu rút tiền
@@ -103,7 +92,7 @@ const AppSideBar = ({ toggleSidebar }) => {
               to={"/admin/orders"}
             >
               <FontAwesomeIcon
-                icon={faCartShopping}
+                icon="cart-shopping"
                 style={{ marginRight: "10px" }}
               />{" "}
               Đơn hàng
@@ -116,4 +105,4 @@ const AppSideBar = ({ toggleSidebar }) => {
   );
 };
 
-export default AppSideBar;
+export default AdminSideBar;

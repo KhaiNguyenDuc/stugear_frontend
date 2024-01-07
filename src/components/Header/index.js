@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBuffer } from '@fortawesome/free-brands-svg-icons'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-import { Button, Container, InputGroup, Nav, Navbar } from 'react-bootstrap'
-import useAuth from '../../hooks/useAuth'
+import { Container, Nav, Navbar } from 'react-bootstrap'
 import UserHeader from '../UserHeader'
-import TitleBox from '../TitleBox/TitleBox'
 
 const Header = ({ sticky }) => {
 
   const user_id = localStorage.getItem('user_id');
   const [isSticky, setSticky] = useState(false);
-  const [searchValue, setSearchValue] = useState("")
-  const naviage = useNavigate()
 
   useEffect(() => {
     if (sticky === true) {
@@ -40,7 +34,7 @@ const Header = ({ sticky }) => {
     >
       <Container>
         <Navbar.Brand as={Link} to="/landing-page" className="navBrn">
-          <FontAwesomeIcon icon={faBuffer} className="brnIcon" />{' '}
+          <FontAwesomeIcon icon="buffer" className="brnIcon" />{' '}
           <span className="navHighlight">StuGear</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

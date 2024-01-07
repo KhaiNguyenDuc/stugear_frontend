@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import "./CategoryFilter.css";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSort } from "@fortawesome/free-solid-svg-icons";
 import ProductService from "../../../service/ProductService";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { InputGroup, Button } from "react-bootstrap";
 const CategoryFilter = ({
   setTotalProduct,
@@ -146,7 +142,7 @@ const CategoryFilter = ({
                   onChange={(e) => handleInputChange(e)}
                 />
                 <Button id="search-button">
-                  <FontAwesomeIcon icon={faSearch} id="search-icon" />
+                  <FontAwesomeIcon icon="search" id="search-icon" />
                 </Button>
               </InputGroup>
             </div>
@@ -158,12 +154,12 @@ const CategoryFilter = ({
         <ul className="dropdown-menu  mt-2" aria-labelledby="dropdown">
           <li>
             <button className="dropdown-item" onClick={() => handleSortClick("lastUpdate")}>
-              <FontAwesomeIcon icon={sortLastUpdate === "increase" ? faArrowDown : faArrowUp} style={{ color: getArrowIconColor(sortLastUpdate) }} /> Ngày đăng
+              <FontAwesomeIcon icon={sortLastUpdate === "increase" ? "arrow-down" : "arrow-up"} style={{ color: getArrowIconColor(sortLastUpdate) }} /> Ngày đăng
             </button>
           </li>
           <li>
             <button className="dropdown-item" onClick={() => handleSortClick("price")}>
-              <FontAwesomeIcon icon={sortPrice === "increase" ? faArrowDown : faArrowUp} style={{ color: getArrowIconColor(sortPrice) }} /> Giá bán
+              <FontAwesomeIcon icon={sortPrice === "increase" ? "arrow-down" : "arrow-up"} style={{ color: getArrowIconColor(sortPrice) }} /> Giá bán
             </button>
           </li>
         </ul>

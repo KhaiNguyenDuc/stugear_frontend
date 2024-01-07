@@ -5,11 +5,6 @@ import { Link } from "react-router-dom";
 import { CSVLink } from "react-csv";
 import CategoryService from "../../service/CategoryService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFileUpload,
-  faInbox,
-  faPencil,
-} from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal";
 
 const AdminCategory = () => {
@@ -246,7 +241,7 @@ const AdminCategory = () => {
                           setSelected(category);
                         }}
                       >
-                        <FontAwesomeIcon icon={faPencil} />
+                        <FontAwesomeIcon icon="pencil" />
                         Chỉnh sửa
                       </button>
                     </td>
@@ -303,7 +298,7 @@ const AdminCategory = () => {
                                 <label>
                                   <div className="edit-image">
                                     <FontAwesomeIcon
-                                      icon={faFileUpload}
+                                      icon="file-upload"
                                       style={{ width: "30px", height: "30px" }}
                                     />
                                   </div>
@@ -338,7 +333,7 @@ const AdminCategory = () => {
                           </div>
                           <div className="my-3 input-group flex-nowrap">
                             <span className="input-group-text">
-                              <FontAwesomeIcon icon={faPencil} />
+                              <FontAwesomeIcon icon="pencil"/>
                             </span>
                             <input
                               required
@@ -382,7 +377,7 @@ const AdminCategory = () => {
                                 <label>
                                   <div className="edit-image">
                                     <FontAwesomeIcon
-                                      icon={faFileUpload}
+                                      icon="file-upload"
                                       style={{ width: "30px", height: "30px" }}
                                     />
                                   </div>
@@ -416,7 +411,7 @@ const AdminCategory = () => {
                           </div>
                           <div className="my-3 input-group flex-nowrap">
                             <span className="input-group-text">
-                              <FontAwesomeIcon icon={faPencil} />
+                              <FontAwesomeIcon icon="pencil"/>
                             </span>
                             <input
                               required

@@ -1,7 +1,5 @@
 import "./ProductDetail.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faCheck } from "@fortawesome/free-solid-svg-icons";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import UserService from "../../../service/UserService";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -105,7 +103,7 @@ const ProductDetail = ({ product, isMember }) => {
           <div className="info-key">Phương thức giao dịch:</div>
           <div className="info-value">
             <div className=" mb-3">
-              <FontAwesomeIcon icon={faCheck} className="check-icon" />{" "}
+              <FontAwesomeIcon icon="check" className="check-icon" />{" "}
               {product.transaction_method}
             </div>
           </div>
@@ -120,7 +118,7 @@ const ProductDetail = ({ product, isMember }) => {
               {product?.transaction_method === "Trên trang web" ? (
                 <>
                          <button className="btn" onClick={(e) => hanldeCheckout(e,product?.id)}>
-                <FontAwesomeIcon icon={faCartShopping} /> Mua ngay
+                <FontAwesomeIcon icon="cart-shopping" /> Mua ngay
               </button>
             
                 </>
@@ -132,7 +130,7 @@ const ProductDetail = ({ product, isMember }) => {
             
             <div className="wishtlist-btn" >
               <button className="btn" onClick={() => addToWishlist()}>
-                <FontAwesomeIcon icon={faHeart} /> Yêu thích
+                <FontAwesomeIcon icon="heart" /> Yêu thích
               </button>
 
             </div>

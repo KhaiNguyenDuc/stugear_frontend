@@ -1,6 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons'
-import { faLock } from '@fortawesome/free-solid-svg-icons'
 import './Verify.css'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -74,7 +72,7 @@ const Verify = () => {
   const sendVerifyEmail = async(e) => {
     e.preventDefault()
     setLoading(true)
-    const result = await UserService.sendVerifyEmail(email)
+    await UserService.sendVerifyEmail(email)
     setLoading(false)
     setErrorMessage("")
     setSuccessMessage("Gửi mã xác thực thành công")
@@ -95,7 +93,7 @@ const Verify = () => {
                 <form onSubmit={(e) => handleSubmit(e)} >
 
                     <div className="my-3 input-group flex-nowrap">
-                        <span className="input-group-text"> <FontAwesomeIcon icon={faLock} /></span>
+                        <span className="input-group-text"> <FontAwesomeIcon icon="lock" /></span>
                         <input required type="text" className="form-control" placeholder="Nhập mã PIN" name="pin"
                         onInput={(e) => handleChange(e)}/>
                     </div>
