@@ -275,10 +275,10 @@ const BalancePage = () => {
                     </div>
                     <div className="d-flex flex-row justify-content-between align-items-center">
                       <div className="d-flex flex-column align-items-start">
-                        <span>Đang thanh toán</span>
+                        <span>Đang nạp tiền</span>
                       </div>
                       <div className="d-flex flex-column justify-content-center">
-                        <span>Thanh toán thành công</span>
+                        <span>Nạp tiền thành công</span>
                       </div>
                     </div>
                   </div>
@@ -286,7 +286,7 @@ const BalancePage = () => {
                     <>
                       <div className="mt-5">
                         <Loading />
-                        <p>Vui lòng hoàn tất quá trình thanh toán của bạn</p>
+                        <p>Vui lòng hoàn tất quá trình nạp tiền của bạn</p>
                         <button
                           className="btn"
                           onClick={() => setPaymentStatus("")}
