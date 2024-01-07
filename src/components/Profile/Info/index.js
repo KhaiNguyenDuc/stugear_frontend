@@ -1,7 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import { faBirthdayCake, faGlobe, faAddressCard, faSchool } from '@fortawesome/free-solid-svg-icons'
-import { faFacebookF, faGoogle, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 const Info = () => {
   return (
         <div id="account-info">
@@ -13,13 +10,13 @@ const Info = () => {
 
                       <div className="row">
                             <div className="col my-3 input-group flex-nowrap">
-                                <span className="input-group-text"> <FontAwesomeIcon icon={faAddressCard} /></span>
+                                <span className="input-group-text"> <FontAwesomeIcon icon="address-card" /></span>
                                 <input required type="text" className="form-control" placeholder="Số nhà"
                                     name="facebook"
                                 />
                             </div>
                             <div className="col my-3 input-group flex-nowrap">
-                                <span className="input-group-text"> <FontAwesomeIcon icon={faAddressCard} /></span>
+                                <span className="input-group-text"> <FontAwesomeIcon icon="address-card" /></span>
                                 <input required type="text" className="form-control" placeholder="Thị Xã / Phường"
                                     name="google"
                                 />
@@ -27,13 +24,13 @@ const Info = () => {
                         </div>
                         <div className="row">
                             <div className="col my-3 input-group flex-nowrap">
-                                <span className="input-group-text"> <FontAwesomeIcon icon={faAddressCard} /></span>
+                                <span className="input-group-text"> <FontAwesomeIcon icon="address-card" /></span>
                                 <input required type="text" className="form-control" placeholder="Tỉnh / Thành phố"
                                     name="facebook"
                                 />
                             </div>
                             <div className="col my-3 input-group flex-nowrap">
-                                <span className="input-group-text"> <FontAwesomeIcon icon={faSchool} /></span>
+                                <span className="input-group-text"> <FontAwesomeIcon icon="school" /></span>
                                 <input required type="text" className="form-control" placeholder="Nơi công tác"
                                     name="google"
                                 />
@@ -41,7 +38,7 @@ const Info = () => {
                         </div>
                         <div className="row">
                             <div className="col my-3 input-group flex-nowrap">
-                                <span className="input-group-text"> <FontAwesomeIcon icon={faAddressCard} /></span>
+                                <span className="input-group-text"> <FontAwesomeIcon icon="address-card" /></span>
                                 <input required type="text" className="form-control" placeholder="Địa chỉ cụ thể"
                                     name="facebook"
                                 />
@@ -55,13 +52,13 @@ const Info = () => {
 
                         <div className="row">
                             <div className="col my-3 input-group flex-nowrap">
-                                <span className="input-group-text"> <FontAwesomeIcon icon={faFacebookF} /></span>
+                                <span className="input-group-text"> <FontAwesomeIcon icon="facebook-f" /></span>
                                 <input required type="text" className="form-control" placeholder="facebook"
                                     name="facebook"
                                 />
                             </div>
                             <div className="col my-3 input-group flex-nowrap">
-                                <span className="input-group-text"> <FontAwesomeIcon icon={faGoogle} /></span>
+                                <span className="input-group-text"> <FontAwesomeIcon icon="google" /></span>
                                 <input required type="text" className="form-control" placeholder="Email"
                                     name="google"
                                 />
@@ -69,13 +66,13 @@ const Info = () => {
                         </div>
                         <div className="row">
                             <div className="col my-3 input-group flex-nowrap">
-                                <span className="input-group-text"> <FontAwesomeIcon icon={faInstagram} /></span>
+                                <span className="input-group-text"> <FontAwesomeIcon icon="instagram" /></span>
                                 <input required type="text" className="form-control" placeholder="Instagram"
                                     name="instagram"
                                 />
                             </div>
                             <div className="col my-3 input-group flex-nowrap">
-                                <span className="input-group-text"> <FontAwesomeIcon icon={faLinkedin} /></span>
+                                <span className="input-group-text"> <FontAwesomeIcon icon="linkedin" /></span>
                                 <input required type="text" className="form-control" placeholder="Linkedin"
                                     name="linkedin"
                                 />

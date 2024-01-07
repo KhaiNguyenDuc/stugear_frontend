@@ -3,7 +3,6 @@ import Header from "../../components/Header"
 import Footer from "../../components/Footer/Footer"
 import AccountSideBar from "../../components/Profile/AccountSideBar/AccountSideBar"
 import { Container } from "react-bootstrap"
-import General from "../../components/Profile/General"
 
 const PersonalLayout = ({children}) => {
     return (

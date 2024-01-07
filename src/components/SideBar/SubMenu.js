@@ -1,13 +1,3 @@
-
-import {
-  faCaretUp,
-  faCaretDown,
-  faBookmark,
-  faBook,
-  faNoteSticky,
-  faGear,
-  faTools
-} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './SubMenu.css'
 import { Link } from 'react-router-dom'
@@ -43,12 +33,12 @@ const SubMenu = ({ category, buyActive, sellActive, isAll }) => {
         <div className={`sub-menu ${buyActive || sellActive ? 'menu-active' : ''}`}>
 
         <Link onClick={toggleSubmenu} >
-          {category.name === "Sách" ? <FontAwesomeIcon icon={faBook} style={{color: 'green'}}/> :  
-           category.name === "Tài liệu" ? <FontAwesomeIcon icon={faNoteSticky} style={{color: 'grey'}}/> :
-           category.name === "Linh kiện" ? <FontAwesomeIcon icon = {faGear}/> : <FontAwesomeIcon icon={faTools}/>}
+          {category.name === "Sách" ? <FontAwesomeIcon icon="book" style={{color: 'green'}}/> :  
+           category.name === "Tài liệu" ? <FontAwesomeIcon icon="note-sticky" style={{color: 'grey'}}/> :
+           category.name === "Linh kiện" ? <FontAwesomeIcon icon = "gear"/> : <FontAwesomeIcon icon="tools"/>}
           {' '} {category.name}{' '}
           <FontAwesomeIcon
-            icon={submenuOpen ? faCaretUp : faCaretDown}
+            icon={submenuOpen ? "caret-up" : "caret-down"}
           />
         </Link>
         </div>
@@ -58,7 +48,7 @@ const SubMenu = ({ category, buyActive, sellActive, isAll }) => {
             <li className={`sub-menu ${buyActive ? 'sub-menu-active' : ''}`} >
               <Link to={`/home-page/category/${category.id}`} >
               <FontAwesomeIcon
-                icon={faBookmark}
+                icon="bookmark"
                 style={{ color: '#111414', marginRight: '8px' }}
               />Mua</Link>
             </li>
@@ -69,7 +59,7 @@ const SubMenu = ({ category, buyActive, sellActive, isAll }) => {
                     <li className={`sub-menu ${sellActive ? 'sub-menu-active' : ''}`}>
               <Link onClick={() => handleUpload(category.id)} >
               <FontAwesomeIcon
-                icon={faBookmark}
+                icon="bookmark"
                 style={{ color: '#F3787A', marginRight: '8px' }}
               />Bán</Link>
             </li>

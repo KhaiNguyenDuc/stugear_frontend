@@ -1,7 +1,6 @@
 import "./SearchSideBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "react-select-search/style.css";
 import CategoryService from "../../service/CategoryService";
 import TagService from "../../service/TagService";
@@ -240,7 +239,7 @@ const SearchSideBar = ({
                 onInput={(e) => handleChange(e)}
               />
               <button className="btn search-button">
-                <FontAwesomeIcon icon={faSearch} id="search-icon" />
+                <FontAwesomeIcon icon="search" id="search-icon" />
               </button>
             </div>
           </div>

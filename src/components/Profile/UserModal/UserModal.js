@@ -1,19 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./UserModal.css";
 import UserService from "../../../service/UserService";
 import Modal from "react-modal";
 import Loading from "../../Loading/index"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAddressCard,
-  faEnvelope,
-  faFlag,
-  faGlobe,
-  faPhone,
-} from "@fortawesome/free-solid-svg-icons";
-
 import AskService from "../../../service/AskService";
-import { Link } from "react-router-dom";
+
 const UserModal = ({ userId }) => {
   const [user, setUser] = useState([]);
   const [reportContent, setReportContent] = useState("");
@@ -190,7 +182,7 @@ const UserModal = ({ userId }) => {
                             onClick={() => setReportShow(!reportShow)}
                           >
                             {" "}
-                            <FontAwesomeIcon icon={faFlag} /> Báo cáo
+                            <FontAwesomeIcon icon="flag" /> Báo cáo
                           </button>
                         </>
                       )}
@@ -243,14 +235,14 @@ const UserModal = ({ userId }) => {
                     <div className=" pt-1 mt-3">
                       <p className="dis ms-1">
                         <FontAwesomeIcon
-                          icon={faEnvelope}
+                          icon="envelope"
                           style={{ marginRight: "7px" }}
                         />{" "}
                         {user?.email}
                       </p>
                       <p className="dis ms-1 ">
                         <FontAwesomeIcon
-                          icon={faPhone}
+                          icon="phone"
                           style={{ marginRight: "7px" }}
                         />
                         {user?.phone_number === null
@@ -259,7 +251,7 @@ const UserModal = ({ userId }) => {
                       </p>
                       <p className="dis ms-1 ">
                         <FontAwesomeIcon
-                          icon={faGlobe}
+                          icon="globe"
                           style={{ marginRight: "7px" }}
                         />
                         {user?.social_link === null
@@ -268,7 +260,7 @@ const UserModal = ({ userId }) => {
                       </p>
                       <p className="dis ms-1 ">
                         <FontAwesomeIcon
-                          icon={faAddressCard}
+                          icon="address-card"
                           style={{ marginRight: "7px" }}
                         />
                         {user?.full_address === null

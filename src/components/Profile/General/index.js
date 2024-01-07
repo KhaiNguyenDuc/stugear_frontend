@@ -1,15 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faEnvelope,
-  faPhone,
-  faSchool,
-  faBirthdayCake,
-  faAddressBook,
-  faUserAstronaut,
-  faPencil,
-  faGlobe,
-} from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import UserService from "../../../service/UserService";
 import useAuth from "../../../hooks/useAuth";
@@ -111,7 +100,7 @@ const General = () => {
             <div className="col my-3 input-group flex-nowrap">
               <span className="input-group-text">
                 {" "}
-                <FontAwesomeIcon icon={faUser} />
+                <FontAwesomeIcon icon="user" />
               </span>
               <input
                 required
@@ -127,7 +116,7 @@ const General = () => {
             <div className="col my-3 input-group flex-nowrap">
               <span className="input-group-text">
                 {" "}
-                <FontAwesomeIcon icon={faEnvelope} />
+                <FontAwesomeIcon icon="envelope" />
               </span>
 
               <input
@@ -176,7 +165,7 @@ const General = () => {
             <div className="col my-3 input-group flex-nowrap">
               <span className="input-group-text">
                 {" "}
-                <FontAwesomeIcon icon={faAddressBook} />
+                <FontAwesomeIcon icon="address-book" />
               </span>
               <input
                 required
@@ -192,7 +181,7 @@ const General = () => {
             <div className="col my-3 input-group flex-nowrap">
               <span className="input-group-text">
                 {" "}
-                <FontAwesomeIcon icon={faPhone} />
+                <FontAwesomeIcon icon="phone" />
               </span>
               <input
                 required
@@ -211,7 +200,7 @@ const General = () => {
             <div className="col   my-3 input-group ">
               <span className="input-group-text">
                 {" "}
-                <FontAwesomeIcon icon={faGlobe} />
+                <FontAwesomeIcon icon="globe" />
               </span>
               <input
                 required
@@ -287,7 +276,7 @@ const General = () => {
                   style={{ backgroundColor: "#c60303" }}
                   onClick={(e) => handleEdit(e)}
                 >
-                  <FontAwesomeIcon icon={faPencil} className="me-2" />
+                  <FontAwesomeIcon icon="pencil" className="me-2" />
                   Chỉnh sửa
                 </button>
               </>

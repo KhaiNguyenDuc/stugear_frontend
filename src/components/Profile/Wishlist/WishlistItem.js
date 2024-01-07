@@ -1,6 +1,5 @@
 import "./WishlistItem.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import UserService from "../../../service/UserService";
 import { ToastContainer, toast } from 'react-toastify';
@@ -21,8 +20,6 @@ const WishlistItem =({item, setKey}) =>{
   }
   const handleRemoveItem = async () => {
     const response = await UserService.removeCurrentUserWishListByProductId(item.id)
-    
-    console.log(response)
     if(response?.status === 500){
       console.log("Something went wrong")
     }
@@ -75,7 +72,7 @@ const WishlistItem =({item, setKey}) =>{
         <td>
           <div className="mt-5">
             <Link style={{textDecoration: 'None', color: 'Black'}} onClick={() => setShow(true)}>
-              <FontAwesomeIcon icon={faTrashCan} size="2x"/>
+              <FontAwesomeIcon icon="trash-can" size="2x"/>
             </Link>
             {isRemoved && (
               <ToastContainer

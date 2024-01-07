@@ -11,11 +11,6 @@ import useProduct from "../../../hooks/useProduct";
 import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import {
-  faDraftingCompass,
-  faPencil,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
 import CustomModal from "../../../components/Modal/Modal";
 // "chặn": "0",
 // "nháp": "1",
@@ -681,7 +676,7 @@ const UploadProduct = () => {
                       <button className="product-draft">
                         {" "}
                         <FontAwesomeIcon
-                          icon={faDraftingCompass}
+                          icon="drafting-compass"
                           className="me-2"
                         />{" "}
                         Lưu bản nháp
@@ -701,7 +696,7 @@ const UploadProduct = () => {
               > 
            <button className="product-edit">
                 {" "}
-                <FontAwesomeIcon icon={faPencil} /> Đăng
+                <FontAwesomeIcon icon="pencil" /> Đăng
               </button>
              
               </Link>
@@ -715,7 +710,7 @@ const UploadProduct = () => {
                     onClick={() => setShow(true)}
                   >
                     <button className="product-remove">
-                      <FontAwesomeIcon icon={faTrash} className="me-2" />
+                      <FontAwesomeIcon icon="trash" className="me-2" />
                       {""}
                       Xóa sản phẩm
                     </button>

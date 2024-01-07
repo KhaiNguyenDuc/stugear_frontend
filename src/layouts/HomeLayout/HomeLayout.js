@@ -1,8 +1,6 @@
 import { Outlet } from 'react-router'
-
 import './HomeLayout.css'
 import { Container } from 'react-bootstrap'
-import ForumTitle from '../../components/Home/ForumTitle/ForumTitle'
 import SideBar from '../../components/SideBar/SideBar'
 import CategoryService from '../../service/CategoryService'
 import Footer from '../../components/Footer/Footer'

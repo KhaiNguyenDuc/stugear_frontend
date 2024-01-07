@@ -1,7 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faInstagram, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import FooterCol from './FooterCol'
 import './Footer.css'
 import { usefulLink, ourServices, otherLinks, footerInfo } from './FooterData'
@@ -24,22 +23,22 @@ const Footer = () => {
                     <ul className="socialIcons">
                         <li>
                             <Link to="/" >
-                                <FontAwesomeIcon icon={faFacebook}/>
+                                <FontAwesomeIcon icon="facebook"/>
                                 </Link>
                         </li>
                         <li>
                             <Link to="/">
-                                <FontAwesomeIcon icon={faTwitter}/>
+                                <FontAwesomeIcon icon="twitter"/>
                                 </Link>
                         </li>
                         <li>
                             <Link to="/">
-                                <FontAwesomeIcon icon={faInstagram}/>
+                                <FontAwesomeIcon icon="instagram"/>
                             </Link>
                         </li>
                         <li>
                             <Link to="/">
-                                <FontAwesomeIcon icon={faLinkedinIn}/>
+                                <FontAwesomeIcon icon="linkedin"/>
                             </Link>
                         </li>
                     </ul>

@@ -1,7 +1,4 @@
-import { Link } from "react-router-dom";
 import "./Wishlist.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import WishlistItem from "./WishlistItem";
 import { useEffect, useState } from "react";
 import UserService from "../../../service/UserService";

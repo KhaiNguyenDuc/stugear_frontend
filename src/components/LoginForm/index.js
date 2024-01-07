@@ -1,12 +1,6 @@
 import { useState } from "react";
 import "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEnvelope,
-  faEye,
-  faEyeSlash,
-  faLock,
-} from "@fortawesome/free-solid-svg-icons";
 import OauthSection from "../../components/OauthSection";
 import Divider from "../../components/Divider";
 import AuthService from "../../service/AuthService";
@@ -15,8 +9,8 @@ import Loading from "../Loading";
 import UserService from "../../service/UserService";
 import useProduct from "../../hooks/useProduct";
 const LoginForm = () => {
-  const { user, setUser } = useAuth();
-  const { productCount, setProductCount } = useProduct();
+  const { setUser } = useAuth();
+  const { setProductCount } = useProduct();
   const [credentials, setCredentials] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(false);
@@ -126,7 +120,7 @@ const LoginForm = () => {
           <div className="mb-3 input-group flex-nowrap">
             <span className="input-group-text">
               {" "}
-              <FontAwesomeIcon icon={faEnvelope} />
+              <FontAwesomeIcon icon="envelope" />
             </span>
             <input
               required
@@ -141,7 +135,7 @@ const LoginForm = () => {
           </div>
           <div className="my-3 input-group flex-nowrap">
             <span className="input-group-text">
-              <FontAwesomeIcon icon={faLock} />
+              <FontAwesomeIcon icon="lock" />
             </span>
             <input
               required
@@ -157,7 +151,7 @@ const LoginForm = () => {
               className="input-group-text"
               onClick={togglePasswordVisibility}
             >
-              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+              <FontAwesomeIcon icon={showPassword ? "eye-slash" : "eye"} />
             </span>
           </div>
 
